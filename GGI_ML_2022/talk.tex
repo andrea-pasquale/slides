@@ -1,0 +1,796 @@
+\documentclass[10pt]{beamer}
+
+\geometry{paperwidth=160mm,paperheight=120mm}
+
+\usetheme[{titleformat plain}=smallcaps,
+           titleformat title=smallcaps,
+           titleformat subtitle=regular,
+           titleformat section=smallcaps,
+           titleformat frame=smallcaps,
+        %    numbering=fraction,
+          ]{metropolis}
+
+\usepackage{style/main}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+\usepackage{amsmath,bm,amsfonts,amssymb,array,calc,amsthm,rotating,amscd,bbm}
+\usepackage{url}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usefonttheme[onlymath]{serif}
+\usepackage[absolute,overlay]{textpos}
+
+\setbeamerfont{caption}{size=\scriptsize}
+% \usepackage[natbib=true,backend=biber,useprefix=true]{biblatex}
+% \addbibresource{references.bib}
+% \setbeamercolor{bibliography item}{parent=palette primary}
+% \setbeamercolor*{bibliography entry title}{parent=palette primary}
+
+% \usetheme[progressbar=frametitle]{metropolis}
+% \setbeamertemplate{frame numbering}[fraction]
+% \metroset{background=dark}
+% \definecolor{primary}{RGB}{245, 10, 10}
+% \setbeamercolor{palette primary}{bg=white, fg=black}
+% \setbeamercolor{background canvas}{parent=palette primary}
+% \setbeamercolor{normal text}{fg=black}
+% \setbeamercolor{progress bar}{use=palette primary, fg=primary}
+% natbib=true,style=authoryear,backend=bibtex,useprefix=true
+% \setbeamerfont{caption}{size=\tiny}
+
+\usepackage[style=authoryear]{biblatex}
+%%% THIS ADDS THE COMMA BETWEEN AUTHOR NAME AND YEAR
+\renewcommand*{\nameyeardelim}{\addcomma\space}
+\addbibresource{test.bib}
+
+
+\title{Product Jacobi-Theta Boltzmann machines with score matching}
+\subtitle{}
+\author{\textit{\textbf{Andrea Pasquale}}, Daniel Krefl, Stefano Carrazza, Frank Nielsen}
+\date{5th September 2022}
+\titlegraphic{
+    \vspace*{11.5cm}
+    \raisebox{20pt}[10pt][10pt]{\includegraphics[height=4cm]{../logos/unimi_logo.pdf}}\hspace*{30pt}
+    \raisebox{20pt}[10pt][10pt]{\includegraphics[height=4cm]{../logos/tii_logo.png}}\hspace*{30pt}
+    \raisebox{20pt}[10pt][10pt]{\includegraphics[height=4cm]{../logos/infn_logo.png}}\hspace*{30pt}
+    % \includegraphics[height=1.3cm]{../_logos/erc_logo1.png}
+
+    % \vfill\vspace*{230pt}
+    % \includegraphics[height=1cm]{../_logos/unimi_logo.png}\hfill
+    % \includegraphics[height=1cm]{../_logos/infn_logo.png}\\
+    % \vspace*{5pt}
+    % {
+    %     \fontsize{3pt}{3.5pt}\selectfont
+    %     \begin{center}
+    %         This project has received funding from the European Union's Horizon
+    %         2020 research and innovation programme under grant agreement No
+    %         % 740006\quad \includegraphics[height=5pt]{../_logos/eu-flag.jpg}
+    %     \end{center}
+    % }
+}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+
+\begin{frame}{Introduction}
+    We started this project aiming to build a model with:
+    \begin{itemize}
+        \item well suited for pdf estimation and pdf sampling 
+        \item built-in pdf normalization (close form expression)
+        \item very flexible with a small number of parameters
+    \end{itemize}
+    We started from Boltzmann Machines
+    \begin{figure}
+        \begin{center}
+            \includegraphics[scale=0.5]{figures/cauchy.pdf}
+            \includegraphics[scale=0.4]{figures/Gaussian2d.eps}
+        \end{center}
+    \end{figure}
+\end{frame}
+\section{Theory}
+
+\begin{frame}{{Boltzmann Machine}}
+    \begin{columns}
+        \begin{column}[]{0.5 \textwidth}
+
+            Graphical representation
+            \begin{figure}
+                \includegraphics[width=\textwidth]{figures/rtbm.pdf}
+            \end{figure}
+        \end{column}
+        \begin{column}[]{0.5 \textwidth}
+            Main Features:
+            \begin{itemize} 
+                \item Visible sector with $N_v$ nodes
+                \item Hidden sector with $N_h$ nodes
+                \item Binary valued states \textbf{\{0,1\}} all the nodes
+                \item Connection matrices $Q$, $T$ and $W$ between the nodes
+            \end{itemize}
+        \end{column}
+    \end{columns}
+    This can be viewed as a statistical system with the following energy for a given state $(v, h)$:
+    \begin{equation*}
+        E(v, h) = \frac{1}{2} v^t T v + \frac{1}{2} h^t Q h + v^t W h + B_h h + B_v v
+    \end{equation*}
+
+    
+    
+\end{frame}
+
+\begin{frame}{Boltzmann Machine}
+   Following a statistical mechanics approach we can compute the canonical partition function as:
+   \begin{equation*}
+        Z = \sum_{h,v} e^{- E(v,h)}
+   \end{equation*}
+   The probability of finding the system is given by the Boltzmann distribution:
+\begin{equation*}
+    P(v, h) = \frac{e^{- E(v,h)}}{Z}
+\end{equation*}
+The probability of finding the system in the state $v$ can be computed by marginalizing $h$
+\begin{equation*}
+    P(v) = \sum_h \frac{e^{- E(v,h)}}{Z} = \frac{e^{- F(v)}}{Z}
+\end{equation*}   
+where $F(v)$ is the the free energy of the system.
+\end{frame}
+
+
+\begin{frame}{Boltzmann Machine (BM)}
+    $P(v)$ is a parametric density probability which depends on the connection matrices $Q$, $T$ and $W$ and
+    the biases $B_v$ and $B_h$. Theoretically one could adjust these parameters to learn an unknown probability
+    distribution of a given dataset.
+    
+    \vspace{1cm}
+    However, this approach is practically \textbf{not feasible}.
+    \vspace{1cm}
+
+    \textbf{How can we change BMs to perform density estimation?}
+\end{frame}
+
+\begin{frame}{Riemann-Theta Boltzmann Machine \hfill \small [\cite{2020}]}
+    We can obtain a non-trivial model if we change the domain from binary values states to continuous/quantized values.
+    If we consider $v \in \mathbb{R}^{N_v}$ and $h \in \mathbb{Z}^{N_h}$, under mild constraints
+    on the connection matrices we can compute $P(v)$ in a closed form:
+    \begin{equation*}
+        P(v) = \sqrt{\frac{\det T}{(2\pi)^{N_v}}} e^{- \frac{1}{2} v^t T v - B_v^t v - B_v^t T^{-1} B_v}
+            \frac{\tilde{\theta}(B^t_h+v^t W \vert Q)}
+            {\tilde{\theta}(B^t_h-B_v^t T^{-1} W \vert Q - W^t T^{-1} W)} \ .
+    \end{equation*}
+    which corresponds to a multi-variate gaussian moldulated by the functions $\tilde{\theta}$, which
+    are known as \textbf{Riemann-Theta (RT)} functions.
+    \newline
+    We called this model the \textbf{Riemann-Theta Boltzmann Machine (RTBM)}. 
+
+    \begin{figure}
+        \begin{center}
+          \includegraphics[scale=0.25]{figures/PvPhaseI-1}
+          \includegraphics[scale=0.25]{figures/PvPhaseI-2}
+          \includegraphics[scale=0.25]{figures/PvPhaseI-3}
+          \includegraphics[scale=0.25]{figures/PvPhaseII-1}
+          \includegraphics[scale=0.25]{figures/PvPhaseII-2}
+          \includegraphics[scale=0.25]{figures/PvPhaseII-3} 
+        %\caption{Plots of $P(v)$ for one-dimensional $v$ and various choices of parameters $B_v,B_h,W,T,Q$. Top row: Phase I. Bottom row: Phase II. The first examples in both phases are with one-dimensional Q, while the remaining plots are for $Q$ of size $2\times 2$. The gray dashed lines mark the means of the distributions.}
+          \label{PvPlots}
+        
+        \end{center}
+        \end{figure}
+        \begin{center}
+            A few examples of $P(v)$ for different parameters.
+        \end{center}
+       
+\end{frame}
+
+\section{Properties of RTBMs}
+
+\begin{frame}{Learning \hfill \small [\cite{2020}]}
+    The RTBM can be used to perform density estimation by adjusting the values of the connection matrices and of the biases.
+    In particular, we need to solve the following optimization problem:
+    \begin{equation*}
+        \argmin_{Q,T,W,B_h,B_v} \mathcal{C}
+    \end{equation*} 
+    where $\mathcal{C}$ is an arbitrary cost function. 
+
+    In the case of Maximum Likelihood Estimation (MLE) we get:
+    \begin{equation*}
+        \argmin_{Q,T,W,B_h,B_v} - \sum_{i=1}^N \log  P(x_i) = \argmax_{Q,T,W,B_h,B_v} \sum_{i=1}^N \log P(x_i)
+    \end{equation*} 
+    Since we have an analytical expression for $P(v)$ we have the possibility to use both
+    gradient or non-gradient based techniques.
+
+
+\end{frame}
+
+\begin{frame}{Examples \hfill \small [\cite{2020}]}
+    \begin{figure}[t!]
+        \begin{center}
+        \includegraphics[scale=0.30]{figures/GammaDist}
+        \includegraphics[scale=0.30]{figures/CauchyDist}
+        \includegraphics[scale=0.30]{figures/CauchyMix}
+        \includegraphics[scale=0.30]{figures/Gaussians}    
+        \includegraphics[scale=0.30]{figures/Likas2}  
+        \includegraphics[scale=0.30]{figures/Likas1}
+
+        %\caption{\tiny Top left: Gamma distribution fitted by a single RTBM with $N_{h}=2$.  Top middle: Cauchy distribution fit via a single RTBM with $N_{h}=3$. Top right: Fit of Cauchy distribution mixture via a layer of two RTBMs with $N_{h}=3$. Bottom left: Gaussian mixture fit by a single RTBM with $N_{h}=3$. Bottom middle: Custom mixture model fit using a single RTBM with $N_{h}=4$. Bottom right: Uniform distribution fit via a single RTBM with $N_h=3$. In all figures the blue line corresponds to the underlying true distribution, while the red line is the fit. The histograms show the samples the models are trained on.}
+        % \label{CauchyDistFig}
+        \end{center}
+      \end{figure}
+      \vspace{-0.5cm}
+      \begin{columns}
+        \begin{column}[]{0.7 \textwidth}
+            \begin{figure}
+                \includegraphics[scale=0.30]{figures/TwoGaussians2d.eps}    
+                \includegraphics[scale=0.30]{figures/ThreeGaussians2d.eps} 
+            \end{figure}
+        \end{column}
+        \begin{column}{0.3 \textwidth}
+            \begin{itemize}
+                \item Blue line: real distribution
+                \item Red line: RTBM
+                \item Histogram: sample from real distribution
+            \end{itemize}
+            
+        \end{column}
+      \end{columns}
+
+       
+
+
+Blue line: true distribution
+Red Line: RTBM 
+\end{frame}
+
+\begin{frame}{Sampling algorithm \hfill \small [\cite{Carrazza:2018nmd}]} 
+    \begin{columns}
+        \begin{column}[]{0.6 \textwidth}
+            The probability for the visible sector can be expressed as:
+            \begin{equation*}
+                P(v) = \sum_{[h]} P(v|h)P(h)\,,
+            \end{equation*}
+            where $P(v|h)$ is a multivariate gaussian. $P(v)$ can be easily sampled using the
+            following algorithm:
+            \begin{itemize}
+                \item sample $\textbf{h} \sim P(h)$ using RT numerical evaluation $\theta = \theta_n + \epsilon(R)$
+                with ellipsoid radius $R$ such that
+            \begin{equation*}
+                p = \frac{\epsilon(R)}{\theta_n + \epsilon(R)} \ll 1 
+            \end{equation*} 
+            is the probability that a point is sampled outside the ellipsoid of radius $R$,
+            while
+            \begin{equation*}
+                \sum_{[h](R)} P(h) = \frac{\theta_n}{\theta_n+\epsilon(R)}\approx 1\,,
+            \end{equation*}
+            is the sum over the lattice points inside the ellipsoid.
+            \item sample $\textbf{v} \sim P(v|\textbf{h})$
+            \end{itemize}
+        \end{column}
+        \begin{column}[]{0.4 \textwidth}
+            \begin{figure}[t!]
+                \begin{center}
+                \includegraphics[scale=0.25]{figures/interpretation.pdf}
+                \includegraphics[scale=0.25]{figures/radius_interpretation.pdf}
+                % \includegraphics[scale=0.30]{figures/CauchyMix}
+                % \includegraphics[scale=0.30]{figures/Gaussians}    
+                % \includegraphics[scale=0.30]{figures/Likas2}  
+                % \includegraphics[scale=0.30]{figures/Likas1}
+        
+                %\caption{\tiny Top left: Gamma distribution fitted by a single RTBM with $N_{h}=2$.  Top middle: Cauchy distribution fit via a single RTBM with $N_{h}=3$. Top right: Fit of Cauchy distribution mixture via a layer of two RTBMs with $N_{h}=3$. Bottom left: Gaussian mixture fit by a single RTBM with $N_{h}=3$. Bottom middle: Custom mixture model fit using a single RTBM with $N_{h}=4$. Bottom right: Uniform distribution fit via a single RTBM with $N_h=3$. In all figures the blue line corresponds to the underlying true distribution, while the red line is the fit. The histograms show the samples the models are trained on.}
+                % \label{CauchyDistFig}
+                \end{center}
+              \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{Sampling examples \hfill \small [\cite{Carrazza:2018nmd}]}
+    One dimensional case:
+    \begin{figure}[t!]
+        \begin{center}
+        \includegraphics[scale=0.30]{figures/gamma.pdf}
+        \includegraphics[scale=0.30]{figures/gaussianmix.pdf}
+        \includegraphics[scale=0.30]{figures/cauchy.pdf}
+        % \includegraphics[scale=0.30]{figures/goog.pdf}    
+        % \includegraphics[scale=0.30]{figures/xom.pdf}
+        % \includegraphics[scale=0.3]{figures/ThreeGaussians2d-eps-converted-to.pdf}
+
+
+        %\caption{\tiny Top left: Gamma distribution fitted by a single RTBM with $N_{h}=2$.  Top middle: Cauchy distribution fit via a single RTBM with $N_{h}=3$. Top right: Fit of Cauchy distribution mixture via a layer of two RTBMs with $N_{h}=3$. Bottom left: Gaussian mixture fit by a single RTBM with $N_{h}=3$. Bottom middle: Custom mixture model fit using a single RTBM with $N_{h}=4$. Bottom right: Uniform distribution fit via a single RTBM with $N_h=3$. In all figures the blue line corresponds to the underlying true distribution, while the red line is the fit. The histograms show the samples the models are trained on.}
+        % \label{CauchyDistFig}
+        \end{center}
+      \end{figure}
+      \vspace{-0.5cm}
+      \begin{columns}
+        \begin{column}{0.6 \textwidth}
+            \begin{center}
+                Multi-dimensional case
+            \end{center}
+            \vspace{-0.5cm}
+            \begin{figure}[t!]
+                \begin{center}
+                \includegraphics[scale=0.4]{figures/ThreeGaussians2d-eps-converted-to.pdf}
+        
+        
+                %\caption{\tiny Top left: Gamma distribution fitted by a single RTBM with $N_{h}=2$.  Top middle: Cauchy distribution fit via a single RTBM with $N_{h}=3$. Top right: Fit of Cauchy distribution mixture via a layer of two RTBMs with $N_{h}=3$. Bottom left: Gaussian mixture fit by a single RTBM with $N_{h}=3$. Bottom middle: Custom mixture model fit using a single RTBM with $N_{h}=4$. Bottom right: Uniform distribution fit via a single RTBM with $N_h=3$. In all figures the blue line corresponds to the underlying true distribution, while the red line is the fit. The histograms show the samples the models are trained on.}
+                % \label{CauchyDistFig}
+                \end{center}
+              \end{figure}
+        \end{column}
+        \begin{column}{0.4 \textwidth}
+            \begin{itemize}
+                \item Blue line: Real distribution
+                \item Red line: RTBM
+                \item Histogram: sample from RTBM
+            \end{itemize}
+        \end{column}
+      \end{columns}
+     
+\end{frame}
+
+% \begin{frame}{Sampling estimators}
+
+%     \begin{figure}[t!]
+%         \begin{center}
+%         \includegraphics[scale=0.35]{figures/Screenshot from 2022-09-03 09-55-26.png}
+
+
+%         %\caption{\tiny Top left: Gamma distribution fitted by a single RTBM with $N_{h}=2$.  Top middle: Cauchy distribution fit via a single RTBM with $N_{h}=3$. Top right: Fit of Cauchy distribution mixture via a layer of two RTBMs with $N_{h}=3$. Bottom left: Gaussian mixture fit by a single RTBM with $N_{h}=3$. Bottom middle: Custom mixture model fit using a single RTBM with $N_{h}=4$. Bottom right: Uniform distribution fit via a single RTBM with $N_h=3$. In all figures the blue line corresponds to the underlying true distribution, while the red line is the fit. The histograms show the samples the models are trained on.}
+%         % \label{CauchyDistFig}
+%         \end{center}
+%       \end{figure}
+
+% \end{frame}
+
+
+\begin{frame}{Affine Transformations \hfill \small [\cite{Carrazza:2018nmd}]}
+    \begin{columns}
+        \begin{column}{0.5 \textwidth}
+            We observe that $P(v)$ stays in the same distribution under affine
+            transformations, i.e. rotation and translation
+            $$
+            \mathbf w = A \mathbf v+b\,, \quad \mathbf w \sim P_{A,b}(v)\,,
+            $$
+            if the linear transformation $A$ has a full column rank.
+            The connection matrices and the biases of the transformed RTBM are given by:
+            \begin{equation*}
+            \begin{split}
+            T^{-1}\rightarrow AT^{-1}A^t\,,&\,\,\,\,\, B_v \rightarrow (A^+)^t B_v-Tb\,,\\
+            W\rightarrow (A^+)^t W\,,&\,\,\,\,\, B_h\rightarrow B_h - W^tb \,.
+            \end{split}
+            \end{equation*}
+            where $A^+$ is the left pseudo-inverse defined as
+            \begin{equation*}\label{leftinverse}
+            A^+ = (A^t A)^{-1}A^t\,.
+            \end{equation*}
+        \end{column}
+        \begin{column}{0.5 \textwidth}
+            \centering
+            Example: rotation of $\theta / 4$ and scailing of $1/2$ ($N_v = 2, N_h =2 $)
+    \begin{figure}
+        \begin{center}
+          \includegraphics[scale=0.4]{figures/rotation2d.pdf}
+          %\caption{Example of an affine transform. The RTBM model from figure \ref{Sampling2dFig} (red lines) is scaled, rotated and translated accordingly to the expressions in section \ref{lineartransfsec} (black lines). The affine transform is also applied to the sampling histogram.}
+          %\label{RotationFig}
+        \end{center}
+      \end{figure}
+        \end{column}
+    \end{columns}
+
+   
+\end{frame}
+
+% \begin{frame}{Affine transformation example}
+    
+%     We can use this property to improve the training:
+%       \begin{enumerate}
+%         \item Perform affine transformation $M$ from domain $D_1$ to $D_2$.
+%         \item Train the model on $D_2$ (easier)
+%         \item Perform inverse affine transformation $M^{-1}$ to transform the model back to $D_1$ already trained.
+%       \end{enumerate}
+% \end{frame}
+
+\section{Limitations}
+
+\begin{frame}{Limitations}
+    Despite the promising results there is one major issue: 
+    \begin{center}
+        \textbf{The learning process can become slow for ($N_h > 5$).} 
+    \end{center}
+    Therefore, it can become challenging to estimate the density of models which require a large hidden sector such as:
+    \begin{itemize}
+        \item Complicated low-dimensional models
+        \item High dimensional models ($N_h \geq N_v$)
+    \end{itemize}
+    
+    \begin{center}
+        \textbf{Why this happens?}
+        \begin{equation*}
+            \theta ( z, \Omega) :=
+            \sum_{n \in \mathbb{Z}^N} e^{2 \pi i \big( \frac{1}{2}n^t \Omega n + n^t z \big)} \ .
+        \end{equation*}
+    \end{center}
+
+    The computation of the RT and its derivatives is computationally challenging due to the infinite sum over 
+    an $N$-dimensional integer lattice $\mathbb{Z}^N$.
+
+    The computational times increase exponentially with $N_h$.
+    
+
+
+\end{frame}
+
+\section{Improving the RTBM}
+
+% \begin{frame}{Conditional probability} 
+% \end{frame}
+
+% \begin{frame}{Code availability} 
+% \end{frame}
+
+% \section{How can we improve this model?}
+
+% \begin{frame}{Problems}
+%     One of the downsides of the current RTBM model is the fact that the learning process can be quite slow.
+%     The bottleneck is caused by the multiple evaluation of the Riemann-Theta function and its
+%     gradient for high values of $N_h$.
+
+%     The computational times increase exponentially with $N_h$
+
+%     \textbf{Can we find a way to solve this issue?}
+%     We develop a solution that tackle this problem in 3 different ways:
+%     \begin{itemize}
+%         \item Choose a particular cost function for the learning process
+%         \item Impose strict conditions on the connection matrices
+%         \item Implement a pre-processing step during the learning
+%     \end{itemize}
+% \end{frame}
+
+\begin{frame}{Factorizability \hfill \small [\cite{new} in preparation]}
+    The RT function has an interesting property that can become useful when dealing with large matrices.
+    Lets consider the following RT function $\theta(z, \Omega)$, if we assume that $\Omega$ 
+    is diagonal the RT can be factorized as follows:
+
+    \begin{equation}
+        \theta(z, \Omega) = \prod_{i=1}^n \theta(z_i, \Omega_{ii})
+    \end{equation}
+    We have reduce the computation of a RT in $n$ dimension to the evaluation of $n$ one-dimensional
+        RT functions!
+    \vspace{-1.3    cm}
+    \begin{columns}
+        \begin{column}{0.7 \textwidth}
+            \begin{figure}
+                \begin{center}
+                    \includegraphics[scale=0.5]{figures/factorized.png}
+                \end{center}
+            \end{figure}
+        \end{column}
+        \begin{column}{0.3 \textwidth}
+            Average time to compute the RT using \cite{deconinck2002computing}
+            
+        \end{column}
+    \end{columns}
+    
+
+    
+\end{frame}
+\begin{frame}{Factorizability  \hfill \small [\cite{new} in preparation]}
+    \emph{Can we speed up the learning process just be evaluating $1d$-RT functions?}
+    Let's recall the expression of the probability distribution obtained by a RTBM:
+
+    \begin{equation*}
+        P(v) = \sqrt{\frac{\det T}{(2\pi)^{N_v}}} e^{- \frac{1}{2} v^t T v - B_v^t - B_v^t T^{-1} B_v}
+            \frac{ \tikz[baseline, remember picture]{
+                \node[anchor= base] (e1) {\fcolorbox{red}{white}{$\tilde{\theta}(B^t_h+v^t W \vert Q)$}};
+            }}
+            {\tikz[baseline, remember picture]{
+                \node[anchor= base] (e1) {\fcolorbox{blue}{white}{$\tilde{\theta}(B^t_h-B_v^t T^{-1} W \vert Q - W^t T^{-1} W)$}};
+            }} \ .
+    \end{equation*}
+
+    % \begin{textblock}{4}(12,6)%
+    %     \begin{scriptsize}
+    %     \tikz[remember picture]{ \node (b1) {Q diagonal};}
+    %     \end{scriptsize}%
+    % \end{textblock}
+
+    % \begin{tikzpicture}[remember picture, overlay]
+    %     \draw [->] (b1.south) -- (e1);
+    % \end{tikzpicture}
+    We have to compute two RT function to evaluate $P(v)$
+    \begin{itemize}
+        \item $\tikz[baseline, remember picture]{
+            \node[anchor= base] (e1) {\fcolorbox{red}{white}{$\tilde{\theta}(B^t_h+v^t W \vert Q)$}};
+        }$ if $Q$ diagonal $\longrightarrow$ \emph{restricted RTBM}
+        \item $\tikz[baseline, remember picture]{
+            \node[anchor= base] (e1) {\fcolorbox{blue}{white}{$\tilde{\theta}(B^t_h-B_v^t T^{-1} W \vert Q - W^t T^{-1} W)$}};
+        }$ $ Q - W^t T^{-1} W$ diagonal? \emph{not feasible}
+    \end{itemize}
+    However, we can observe that the second term is a just for normalization.
+
+    \emph{Idea}: Is there a learning process in which we can avoid computing the partition function for all system?
+
+\end{frame}
+
+\begin{frame}{Score Matching \hfill \small [\cite{lyu2012interpretation}]}
+    A particular parameter learning methodology that can address this issue is \emph{Score Matching}, which is 
+    based on the Fisher divergence.
+        \begin{equation*}
+            D_F(p\lvert \lvert q_\theta) = \int p(x) \Bigg\vert 
+            \frac{\nabla_{x} \ p(x)}{p(x)} -
+            \frac{\nabla_{x} \ q(x,\theta)}{q(x,\theta)}  \Bigg\vert^2 d x \ , 
+        \end{equation*}
+    which slightly different from the Kullback-Leiber divergence:
+    \begin{equation*}
+        D_{KL}(p\lvert \lvert q_\theta) = \int
+            p(x) \log{\frac{p(x)}{q(x,\theta)}} d x \ , 
+    \end{equation*}
+    
+In the score matching there is no need to evaluate the partition function since all the terms 
+are of the from $\dfrac{\nabla_{x} \ p(x)}{p(x)}$ which leads to the cancellation of the normalizing terms.
+
+
+Therefore we can get rid of the the non diagonal term in $P(v)$ during the learning process.
+\end{frame}
+
+\begin{frame}{Score Matching \hfill \small [\cite{new} in preparation]}
+    We can simplify the espression for $D_F$ under the assumption that our model $q(x, \theta)$ is sufficiently regular,
+    which is the case of the RTBM.
+    \begin{equation*}
+        \begin{split}
+        D_F(p\lvert \lvert q_\theta) &=  \int p(x) \bigg(
+            \big\vert \nabla_{x} \log{q(x,\theta)} \big\vert^2 +
+            2 \Delta_{x} \log{q(x,\theta)}
+            \bigg) + \text{const}  \\
+            &\approx 
+            \tikz[baseline, remember picture]{
+                \node[anchor= base] (e1) {\fcolorbox{green}{white}{$\sum_{i=1}^N \Bigg \vert 
+                \nabla_{v_i} \log{q(v_i, \theta)} \Bigg \vert^2
+                + 2 \Delta_{v_i} \log{q(v_i, \theta)}$}};
+            }
+            + \text{const}\,.
+        \end{split} 
+    \end{equation*}
+
+    \begin{textblock}{4}(7,9)%
+        \begin{scriptsize}
+        \tikz[remember picture]{ \node (b1) {Fisher Cost function};}
+        \end{scriptsize}%
+    \end{textblock}
+
+    \vspace{1cm}
+    We will now show how the Fisher cost function can be evaluated only by computing 1-dimensional RT functions.
+\end{frame}
+
+\begin{frame}{Gradients for RTBM \hfill \small [\cite{new} in preparation]}
+
+    \begin{equation*}
+        \begin{split}
+         \partial_{v_i} \log{P(v)} &= - ( T v)_i - (B_v)_i + ( W D)_i\,,\\
+         \partial^2_{v_i} \log{P(v)} &= - T _{ii} + (W H W^t)_{ii} + ( W D)^2_i\,,
+       \end{split}   
+       \end{equation*}
+       with $D$ the normalized gradient and $H$ the normalized hessian 
+       \begin{equation*}
+           (D)_i = \frac{\nabla_i \tilde{\theta}(B^t_h+v^t W \vert Q)}{\tilde{\theta}(B^t_h+v^t W \vert Q)} 
+           \,, \quad
+           (H)_{ij} = \frac{\nabla_i \nabla_j \tilde{\theta}(B^t_h+v^t W \vert Q)}{\tilde{\theta}(B^t_h+v^t W \vert Q)}\,.
+       \end{equation*}
+       If $Q$ is diagonal 
+       \begin{equation*}
+        \partial_{v_i} \log{P(v)} = - ( T v)_i - (B_v)_i + \sum_{j=1}^{N_h} \frac{\partial_{v_i} \tilde{\theta}((B^t_h+v^t W)_j \vert Q_{jj})}{\tilde{\theta}((B^t_h+v^t W)_j \vert Q_{jj})} W_{ji}\,,
+   \end{equation*}
+   
+   \begin{equation*}
+   \begin{split}
+        \partial_{v_i}^2 \log{P(v)} =& - T_{ii} + 
+        \sum_{j=1}^{N_h} \frac{\partial^2_{v_i} \tilde{\theta}((B^t_h+v^t W)_j \vert Q_{jj})}
+        {\tilde{\theta}((B^t_h+v^t W)_j \vert Q_{jj})} W_{ji}^2\\
+        &
+        - 
+        \sum_{j=1}^{N_h} \frac{(\partial_{v_i} \tilde{\theta}((B^t_h+v^t W)_j \vert Q_{jj}))^2}
+        {\tilde{\theta}((B^t_h+v^t W)_j \vert Q_{jj})} W_{ji}\,.
+   \end{split}
+   \end{equation*}
+   The cost function can be evaluated using only 1d RT functions!
+\end{frame}
+
+\section{Applications}
+
+\begin{frame}{Uranium dataset \hfill \small [\cite{new} in preparation]}
+
+    \begin{figure}
+        \includegraphics[scale=0.5]{figures/uranium15.png}
+        \includegraphics[scale=0.5]{figures/uranium37.png}
+
+            \caption{rRTBMs modelling the concentrations of Uranium
+            and Cesium (first row), Cobalt and Titanium (second row) and, Cesium and Scandium (third row) for $N_h = 2,4,6$ (left,center,right).
+                 The rRTBM contours and histograms of the original data are shown.}
+    \end{figure}
+    
+    
+\end{frame}
+
+\begin{frame}{Uranium dataset \hfill \small [\cite{new} in preparation]}
+
+    \begin{figure}
+        % \includegraphics[scale=0.5]{figures/uranium15.png}
+        % \includegraphics[scale=0.5]{figures/uranium37.png}
+        \includegraphics[scale=0.5]{figures/uranium56.png}
+        \includegraphics[scale=0.2]{figures/Screenshot from 2022-09-04 16-47-05.png}
+    \end{figure}
+    
+    
+\end{frame}
+\begin{frame}{Faithful dataset \hfill \small [\cite{new} in preparation]}
+
+    \begin{figure}
+        % \includegraphics[scale=0.5]{figures/uranium15.png}
+        % \includegraphics[scale=0.5]{figures/uranium37.png}
+        \includegraphics[scale=0.7]{figures/faithful.png}
+       
+            \caption{\scriptsize rRTBMs trained to model the waiting time between eruptions and the duration of the eruption for the Old Faithful geyser for $N_h = 2$ (top left), $N_h = 4$ (top right), $N_h = 6$ (bottom left) and $N_h = 8$ (bottom right).
+            The curves correspond to the rRTBM model and the gray histogram is obtained from the original data with 30 bins.}
+    \end{figure}
+    
+    
+\end{frame}
+
+\begin{frame}{Iris dataset \hfill \small [\cite{new} in preparation]}
+
+    \begin{figure}
+        % \includegraphics[scale=0.5]{figures/uranium15.png}
+        % \includegraphics[scale=0.5]{figures/uranium37.png}
+        \includegraphics[scale=0.7]{figures/iris.png}
+       
+            \caption{rRTBMs trained to model the joint 
+            distribution of sepal width and sepal length from the Iris dataset for $N_h = 2$ (top left), $N_h = 4$ (top right), $N_h = 6$ (bottom left) and $N_h = 8$ (bottom right).
+                 The curves correspond to the rRTBM model and the gray histogram is obtained from the original data with 30 bins.}
+    \end{figure}
+    
+    
+\end{frame}
+
+\begin{frame}{Results \hfill \small [\cite{new} in preparation]}
+    \begin{figure}
+        % \includegraphics[scale=0.5]{figures/uranium15.png}
+        % \includegraphics[scale=0.5]{figures/uranium37.png}
+        % \includegraphics[scale=0.5]{figures/uranium56.png}
+        \includegraphics[scale=0.2]{figures/Screenshot from 2022-09-04 16-46-31.png}
+    \end{figure}
+    
+    The RTBM in this case does not reach a better perfomance but it is still competitive.
+\end{frame}
+
+\section{Conclusion}
+
+\begin{frame}{Outlook}
+    In summary
+    \begin{itemize}
+        \item The (r)RTBM is a valid model to perform density estimation
+        \item Using score matching we are able to train efficiently using large values of $N_h$
+        \item Open source code soon available here: \url{https://github.com/RiemannAI/theta}
+    \end{itemize}
+    
+    For the future
+    \begin{itemize}
+        \item Speed up the computation of the RT by moving to a GPU implementation
+        \item Possibility to use this mechanism to perform MC multi-dimensional integration for physics related problem
+    \end{itemize}
+\end{frame}
+
+\section*{Thanks for listening!}
+
+
+% \begin{frame}
+%     \frametitle{Two equations}
+%     \begin{itemize}
+%         \item This is the first equation
+%         \begin{equation*}
+%         a + \dfrac{a}{b} + \dfrac{b}{c} = 
+%         \tikz[baseline, remember picture]{
+%             \node[anchor= base] (e1) {\fcolorbox{red}{white}{$\sqrt{\dfrac{b}{a+b+c}}$}};
+%         }
+%         \end{equation*}     
+%         \item This is the second equation
+%         \begin{equation*}
+%         a + \dfrac{a}{b} + \dfrac{b}{c} = 
+%         \tikz[baseline, remember picture]{
+%             \node[anchor=base] (e2) {\fcolorbox{red}{white}{$\log\left({\dfrac{b}{a+b+c}}\right)$}};
+%         }
+%         \end{equation*}
+%     \end{itemize}
+
+%     \begin{textblock}{4}(12,3)%
+%         \begin{scriptsize}
+%         \tikz[remember picture]{ \node (b1) {Q diagonal};}
+%         \end{scriptsize}%
+%     \end{textblock}
+
+%     \begin{textblock}{3.5}(4,12)%
+%         \begin{scriptsize}
+%         \tikz[remember picture]{ \node (b2) { Term in 2nd equation};}
+%         \end{scriptsize}%
+%     \end{textblock}
+    
+% \begin{tikzpicture}[remember picture, overlay]
+%     \draw [->] (b1.south) -- (e1);
+%     \draw [->] (b2.east) -- (e2);
+% \end{tikzpicture}
+        
+% \end{frame}
+
+
+\section{Appendix }
+\begin{frame}{Efficient calculation of the 1d RT \hfill \small [\cite{new} in preparation]}
+    The computation of the RT and its derivatives is computationally challenging due to the infinite sum over 
+    an $N$-dimensional integer lattice $\mathbb{Z}^N$
+    \begin{equation*}
+        \theta ( z, \Omega) :=
+        \sum_{n \in \mathbb{Z}^N} e^{2 \pi i \big( \frac{1}{2}n^t \Omega n + n^t z \big)} \ .
+    \end{equation*}
+
+    For the multi-dimensional case we can obtain a numerical approximation by summing over an finite subset of lattice points.
+
+    For the 1d case there exist more efficient methods.
+    A possibility is to truncate the series:
+    \begin{equation*}
+        \theta ( z, \Omega) \approx S_B(z, \Omega) = 1 + \sum_{0 < n < B}  q^{n^2} (e^{2 \pi i n z} + e^{- 2 \pi i n z}) =: 
+        1 + \sum_{0 < n < B} v_n \, .
+    \end{equation*}
+
+
+    It can be shown (see \cite{theta}) that $v_n$ can be computed recursively, giving us a fast algorithm to evaluate
+    the RT in dim 1.
+    \begin{equation}
+            v_{n+1} = q^{ 2 n} v_1 v_n - q^{4 n} v_{n-1} \,. 
+        \end{equation}
+        where  $q = e^{i \pi \Omega}$ .
+\end{frame}
+
+\begin{frame}{What about the gradients? \hfill \small [\cite{new} in preparation]}
+    To speed up the learning process for the RTBM we would like to have a similar algorithm for the derivatives
+    of the RT function. 
+    In our work he prove that this is possible:
+    \begin{equation*}
+        \frac{d}{d z} \theta(z, \Omega) \approx U_B(z, \Omega) = \sum_{1 < n < B}  - 4 \pi n  q^{n^2} \sin(2 \pi n z) =:  \sum_{1 < n < B} w_n \ ,
+   \end{equation*}
+   \begin{equation*}
+    \frac{d^2}{d z^2} \theta(z, \Omega) \approx V_B(z, \Omega) = \sum_{1 < n < B}  - 8 \pi^2 n^2 q^{n^2} \cos(2 \pi n z) =:  \sum_{1 < n < B} \xi_n \ .
+   \end{equation*}
+
+   After a few mathematical passages it can be shown that there exist a recurrence to compute both $w_n$ and $\xi_n$.
+
+
+   \begin{equation*}
+    w_{n+1} =  (n+1) \bigg[ \frac{2 \cos(2 \pi z)}{n} q^{2n + 1} w_n - 
+    \frac{q^{4n}}{n-1} w_{n-1}\bigg]\,,
+   \end{equation*}
+
+   \begin{equation*}
+        \xi_{n+1} = (n+1)^2 \bigg[ \frac{2 \cos( 2 \pi z)}{n^2} q^{2 n + 1} \xi_n 
+        - \frac{1}{(n-1)^2}  q^{4n}\xi_{n-1} \bigg]\,.
+   \end{equation*}
+
+\end{frame}
+
+\begin{frame}{Results \hfill \small [\cite{new} in preparation]}
+    \begin{figure}[t]
+        %\hspace*{-2.5cm} 
+            \includegraphics[width=0.8\columnwidth]{figures/theta.png}
+                % \caption{\tiny Performance comparison between the implementation of the one-dimensional Riemann-Theta function and its derivatives of \cite{deconinck2002computing},
+                % and the naive algorithm from \cite{theta} extended to the calculation of the derivatives, as described in the main text. In the y-axis we
+                % show the ratio between the average time to compute a fixed number of evaluations for \cite{deconinck2002computing}, denoted by $\tau_D$, 
+                % and \cite{theta}, denoted by $\tau_R$.
+                % The parameters of the theta function have been sampled uniformly from the imaginary unit interval and we averaged over 10 independent runs. }
+            \label{fig:theta}
+    \end{figure}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Bibliography}
+ \printbibliography
+\end{frame}
+
+\end{document}
