@@ -1,10 +1,10 @@
 # Fdb version 3
-["pdflatex"] 1664194449 "/home/andrea/PhD/slides/WorkShopFirstYear/talk.tex" "talk.pdf" "talk" 1664194452
+["pdflatex"] 1664209385 "/home/andrea/PhD/slides/WorkShopFirstYear/talk.tex" "talk.pdf" "talk" 1664209388
   "../logos/infn_logo.png" 1663680870 23559 90eceadf3c9d9668b3b235ef064b97b8 ""
   "../logos/tii_logo.png" 1663680870 20014 5680f0535a5206c36f526b1e2f62ebd1 ""
   "../logos/unimi_logo.pdf" 1663680870 27707 1de7fd358d5bd9b410d3a83cd1de5d6e ""
   "/etc/texmf/web2c/texmf.cnf" 1651398830 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/andrea/PhD/slides/WorkShopFirstYear/talk.tex" 1664194445 17304 52507904105ba1a95ae161dca651868f ""
+  "/home/andrea/PhD/slides/WorkShopFirstYear/talk.tex" 1664209335 17319 192cb72a86197352009dd2e4579b4dac ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/fontawesome/fontawesomeone.enc" 1463430686 1687 f004baecce60175c6453d0e3f808cf20 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/fontawesome/fontawesomethree.enc" 1463430686 2437 443c81fb50993bacedc5f9a206c322b0 ""
   "/usr/share/texlive/texmf-dist/fonts/enc/dvips/fontawesome/fontawesometwo.enc" 1463430686 2679 32dd8ae231bf4a0752b98f62dc097183 ""
@@ -365,7 +365,7 @@
   "figures/devices_qft_total_simulation_time_double.pdf" 1663335747 29514 c623d4bb3c57e53009eba8b78680af97 ""
   "figures/fpga.png" 1663838242 314304 8bf6130416dc4dc6fcb1e3713ef43e5b ""
   "figures/hardwarecircuit.png" 1663770120 78107 1062fe5cdf22109ac1aed48fc7f4c8fe ""
-  "figures/intro.png" 1664193920 145475 e38abee2377c8bba007b371d912879c0 ""
+  "figures/intro.png" 1664209384 144621 14954d73af961f63e576c1a5a0ff5278 ""
   "figures/libraries_double_20qubits_total_dry_time.pdf" 1663335747 26120 895eca6c99e836d3167c458034327b6c ""
   "figures/libraries_double_30qubits_total_dry_time.pdf" 1663335747 29879 9b6df1d90c63fe0c630207c657fbd47f ""
   "figures/map.png" 1663844602 601933 5cf939a44a6e897599c4ff4a3285bc0d ""
@@ -381,11 +381,11 @@
   "figures/resonator.png" 1663865997 60056 d5283999cdaef0b0362e9c6b3f1e68b7 ""
   "figures/rohde.jpg" 1663837688 505316 58a76fb3e36b227ad584cec866d3f6f6 ""
   "style/main.sty" 1663681015 629 cbc39fb5372fdfc462b06e1732eba578 ""
-  "talk.aux" 1664194452 6951 db0c7d0f22bd248c8b5802c56d2a56d0 "pdflatex"
-  "talk.nav" 1664194452 3984 e3f3443edc3e167ee1757a7d9ecd7164 "pdflatex"
-  "talk.out" 1664194452 1281 eabcbc3554615790f241d1db23856513 "pdflatex"
-  "talk.tex" 1664194445 17304 52507904105ba1a95ae161dca651868f ""
-  "talk.vrb" 1664194451 684 9a52ce418d124a997399200a3f1e89ee "pdflatex"
+  "talk.aux" 1664209388 6951 db0c7d0f22bd248c8b5802c56d2a56d0 "pdflatex"
+  "talk.nav" 1664209388 3984 e3f3443edc3e167ee1757a7d9ecd7164 "pdflatex"
+  "talk.out" 1664209388 1281 eabcbc3554615790f241d1db23856513 "pdflatex"
+  "talk.tex" 1664209335 17319 192cb72a86197352009dd2e4579b4dac ""
+  "talk.vrb" 1664209387 684 9a52ce418d124a997399200a3f1e89ee "pdflatex"
   (generated)
   "talk.aux"
   "talk.log"
