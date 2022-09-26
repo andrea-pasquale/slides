@@ -1,7 +1,7 @@
 \babel@toc {english}{}\relax 
-\beamer@sectionintoc {1}{Introduction on Quantum computing}{3}{0}{1}
-\beamer@sectionintoc {2}{How can we implement physical qubits?}{6}{0}{2}
-\beamer@sectionintoc {3}{Introducing Qibo}{8}{0}{3}
+\beamer@sectionintoc {1}{Introduction on Quantum computing}{4}{0}{1}
+\beamer@sectionintoc {2}{How can we implement physical qubits?}{7}{0}{2}
+\beamer@sectionintoc {3}{Introducing Qibo}{9}{0}{3}
 \beamer@sectionintoc {4}{Hardware control using Qibo}{16}{0}{4}
 \beamer@sectionintoc {5}{A reporting tool for calibration using Qibo}{21}{0}{5}
 \beamer@sectionintoc {6}{Outlook}{25}{0}{6}
