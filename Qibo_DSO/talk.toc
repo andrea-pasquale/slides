@@ -1,0 +1,9 @@
+\babel@toc {english}{}\relax 
+\beamer@sectionintoc {1}{Basic elements of classical logic}{3}{0}{1}
+\beamer@sectionintoc {2}{Brief overview on Quantum Mechanics}{14}{0}{2}
+\beamer@sectionintoc {3}{Quantum Computing}{22}{0}{3}
+\beamer@sectionintoc {4}{Applications}{43}{0}{4}
+\beamer@sectionintoc {5}{Introduction to quantum algorithms}{49}{0}{5}
+\beamer@sectionintoc {6}{Towards Quantum Machine Learning}{58}{0}{6}
+\beamer@sectionintoc {7}{Quantum Technology}{62}{0}{7}
+\beamer@sectionintoc {8}{Languages for quantum computing}{67}{0}{8}
