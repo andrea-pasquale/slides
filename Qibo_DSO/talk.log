@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2022.5.1)  4 OCT 2022 20:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2022.5.1)  5 OCT 2022 11:48
 entering extended mode
  \write18 enabled.
  file:line:error style messages enabled.
@@ -1041,7 +1041,7 @@ Grid set 16 x 16 = 28.45274pt x 21.33955pt
 TextBlockOrigin set to 0pt x 0pt
 )
 LaTeX Info: Redefining \HepProcess on input line 59.
-LaTeX Info: Redefining \HepProcess on input line 83.
+LaTeX Info: Redefining \HepProcess on input line 86.
 Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
@@ -1049,24 +1049,24 @@ Package csquotes Info: Redefining alias 'default' -> 'english'.
  (./talk.aux)
 \openout1 = `talk.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 86.
+LaTeX Font Info:    ... okay on input line 86.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1127,7 +1127,7 @@ Package grfext Info: Graphics extension search list:
  (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Live
 ))
-Package hyperref Info: Link coloring OFF on input line 83.
+Package hyperref Info: Link coloring OFF on input line 86.
  (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
  (/usr/share/texlive/texmf-dist/tex/latex/refcount/refcount.sty
@@ -1137,9 +1137,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count398
 )
-LaTeX Info: Redefining \ref on input line 83.
-LaTeX Info: Redefining \pageref on input line 83.
-LaTeX Info: Redefining \nameref on input line 83.
+LaTeX Info: Redefining \ref on input line 86.
+LaTeX Info: Redefining \pageref on input line 86.
+LaTeX Info: Redefining \nameref on input line 86.
  (./talk.out) (./talk.out)
 \@outlinefile=\write5
 \openout5 = `talk.out'.
@@ -1159,506 +1159,517 @@ Dictionary: translator-theorem-dictionary, Language: English
 ) (/usr/share/texlive/texmf-dist/tex/latex/translations/translations-basic-dictionary-english.trsl
 File: translations-basic-dictionary-english.trsl (english translation file `translations-basic-dictionary')
 )
-Package translations Info: loading dictionary `translations-basic-dictionary' for `english'. on input line 83.
+Package translations Info: loading dictionary `translations-basic-dictionary' for `english'. on input line 86.
  (./talk.nav)
+<figures/ichpc.png, id=49, 359.3425pt x 141.52875pt>
+File: figures/ichpc.png Graphic file (type png)
+<use figures/ichpc.png>
+Package pdftex.def Info: figures/ichpc.png  used on input line 88.
+(pdftex.def)             Requested size: 108.36285pt x 42.67912pt.
+
 
 pdfTeX warning: pdflatex (file ../logos/unimi_logo.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<../logos/unimi_logo.pdf, id=49, 597.23125pt x 845.1575pt>
+<../logos/unimi_logo.pdf, id=50, 597.23125pt x 845.1575pt>
 File: ../logos/unimi_logo.pdf Graphic file (type pdf)
 <use ../logos/unimi_logo.pdf>
-Package pdftex.def Info: ../logos/unimi_logo.pdf  used on input line 85.
+Package pdftex.def Info: ../logos/unimi_logo.pdf  used on input line 88.
 (pdftex.def)             Requested size: 80.42224pt x 113.81102pt.
-<../logos/tii_logo.png, id=50, 596.9502pt x 844.8363pt>
+<../logos/tii_logo.png, id=51, 596.9502pt x 844.8363pt>
 File: ../logos/tii_logo.png Graphic file (type png)
 <use ../logos/tii_logo.png>
-Package pdftex.def Info: ../logos/tii_logo.png  used on input line 85.
+Package pdftex.def Info: ../logos/tii_logo.png  used on input line 88.
 (pdftex.def)             Requested size: 80.41173pt x 113.81102pt.
-<../logos/infn_logo.png, id=52, 596.9502pt x 844.8363pt>
-File: ../logos/infn_logo.png Graphic file (type png)
-<use ../logos/infn_logo.png>
-Package pdftex.def Info: ../logos/infn_logo.png  used on input line 85.
-(pdftex.def)             Requested size: 80.41173pt x 113.81102pt.
+<figures/cqt.png, id=53, 401.5pt x 401.5pt>
+File: figures/cqt.png Graphic file (type png)
+<use figures/cqt.png>
+Package pdftex.def Info: figures/cqt.png  used on input line 88.
+(pdftex.def)             Requested size: 85.35896pt x 85.35826pt.
 
-Overfull \vbox (358.96672pt too high) detected at line 85
+Overfull \hbox (23.47055pt too wide) in paragraph at lines 88--88
+[][]|  []|  []|  [] 
+ []
+
+
+Overfull \vbox (358.96672pt too high) detected at line 88
  []
 
 
 LaTeX Font Warning: Font shape `T1/cmss/m/sc' undefined
-(Font)              using `T1/cmss/m/n' instead on input line 85.
+(Font)              using `T1/cmss/m/n' instead on input line 88.
 
 
 LaTeX Font Warning: Font shape `T1/cmss/bx/sc' undefined
-(Font)              using `T1/cmss/bx/n' instead on input line 85.
+(Font)              using `T1/cmss/bx/n' instead on input line 88.
 
 
-Overfull \vbox (15.63992pt too high) detected at line 85
+Overfull \vbox (15.63992pt too high) detected at line 88
  []
 
-LaTeX Info: Redefining \HepProcess on input line 85.
+LaTeX Info: Redefining \HepProcess on input line 88.
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <../logos/unimi_logo.pdf> <../logos/tii_logo.png> <../logos/infn_logo.png>] (./talk.toc)
-LaTeX Info: Redefining \HepProcess on input line 90.
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./figures/ichpc.png> <../logos/unimi_logo.pdf> <../logos/tii_logo.png> <./figures/cqt.png>] (./talk.toc)
+LaTeX Info: Redefining \HepProcess on input line 93.
  [2
 
 ]
-LaTeX Info: Redefining \HepProcess on input line 92.
-LaTeX Info: Redefining \HepProcess on input line 92.
+LaTeX Info: Redefining \HepProcess on input line 95.
+LaTeX Info: Redefining \HepProcess on input line 95.
  [3
 
 ]
-<figures/binary_code.jpg, id=96, 1002.74625pt x 1084.05pt>
+<figures/binary_code.jpg, id=98, 1002.74625pt x 1084.05pt>
 File: figures/binary_code.jpg Graphic file (type jpg)
 <use figures/binary_code.jpg>
-Package pdftex.def Info: figures/binary_code.jpg  used on input line 106.
+Package pdftex.def Info: figures/binary_code.jpg  used on input line 109.
 (pdftex.def)             Requested size: 199.1693pt x 215.31744pt.
 
-Overfull \hbox (5.0pt too wide) in paragraph at lines 106--106
+Overfull \hbox (5.0pt too wide) in paragraph at lines 109--109
  [] 
  []
 
-<figures/binary.jpg, id=97, 491.8375pt x 511.9125pt>
+<figures/binary.jpg, id=99, 491.8375pt x 511.9125pt>
 File: figures/binary.jpg Graphic file (type jpg)
 <use figures/binary.jpg>
-Package pdftex.def Info: figures/binary.jpg  used on input line 106.
+Package pdftex.def Info: figures/binary.jpg  used on input line 109.
 (pdftex.def)             Requested size: 199.1693pt x 207.29999pt.
 
-Overfull \hbox (5.0pt too wide) in paragraph at lines 106--106
+Overfull \hbox (5.0pt too wide) in paragraph at lines 109--109
  [] 
  []
 
-LaTeX Info: Redefining \HepProcess on input line 106.
+LaTeX Info: Redefining \HepProcess on input line 109.
 [4
 
  <./figures/binary_code.jpg> <./figures/binary.jpg>]
-LaTeX Info: Redefining \HepProcess on input line 133.
+LaTeX Info: Redefining \HepProcess on input line 136.
  [5
 
 ]
-<figures/truth-table.png, id=112, 1417.295pt x 653.44125pt>
+<figures/truth-table.png, id=114, 1417.295pt x 653.44125pt>
 File: figures/truth-table.png Graphic file (type png)
 <use figures/truth-table.png>
-Package pdftex.def Info: figures/truth-table.png  used on input line 143.
+Package pdftex.def Info: figures/truth-table.png  used on input line 146.
 (pdftex.def)             Requested size: 398.3386pt x 183.65027pt.
-LaTeX Info: Redefining \HepProcess on input line 143.
+LaTeX Info: Redefining \HepProcess on input line 146.
  [6
 
  <./figures/truth-table.png>]
-Overfull \vbox (11.75974pt too high) detected at line 171
+Overfull \vbox (11.75974pt too high) detected at line 174
  []
 
-LaTeX Info: Redefining \HepProcess on input line 171.
+LaTeX Info: Redefining \HepProcess on input line 174.
 [7
 
 ]
-Overfull \vbox (11.75974pt too high) detected at line 171
+Overfull \vbox (11.75974pt too high) detected at line 174
  []
 
-LaTeX Info: Redefining \HepProcess on input line 171.
+LaTeX Info: Redefining \HepProcess on input line 174.
 [8
 
 ]
-LaTeX Font Info:    Trying to load font information for TS1+cmss on input line 200.
+LaTeX Font Info:    Trying to load font information for TS1+cmss on input line 203.
  (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmss.fd
 File: ts1cmss.fd 2019/12/16 v2.5j Standard LaTeX font definitions
 )
-Overfull \vbox (6.17421pt too high) detected at line 200
+Overfull \vbox (6.17421pt too high) detected at line 203
  []
 
-LaTeX Info: Redefining \HepProcess on input line 200.
+LaTeX Info: Redefining \HepProcess on input line 203.
 [9
 
 ]
-Overfull \vbox (6.17421pt too high) detected at line 200
+Overfull \vbox (6.17421pt too high) detected at line 203
  []
 
-LaTeX Info: Redefining \HepProcess on input line 200.
+LaTeX Info: Redefining \HepProcess on input line 203.
 [10
 
 ]
 
 Package multicol Warning: multicols* inside a box does not make sense.
-(multicol)                Going to balance anyway on input line 245.
+(multicol)                Going to balance anyway on input line 248.
 
 
 Package multicol Warning: multicols* inside a box does not make sense.
-(multicol)                Going to balance anyway on input line 245.
+(multicol)                Going to balance anyway on input line 248.
 
 
 LaTeX Font Warning: Font shape `U/wasy/b/n' in size <9> not available
-(Font)              Font shape `U/wasy/m/n' tried instead on input line 245.
+(Font)              Font shape `U/wasy/m/n' tried instead on input line 248.
 
 
 LaTeX Font Warning: Font shape `U/wasy/b/n' in size <5> not available
-(Font)              Font shape `U/wasy/m/n' tried instead on input line 245.
+(Font)              Font shape `U/wasy/m/n' tried instead on input line 248.
 
-LaTeX Info: Redefining \HepProcess on input line 245.
+LaTeX Info: Redefining \HepProcess on input line 248.
 [11
 
 ]
-LaTeX Info: Redefining \HepProcess on input line 268.
+LaTeX Info: Redefining \HepProcess on input line 271.
  [12
 
 ]
-LaTeX Info: Redefining \HepProcess on input line 295.
+LaTeX Info: Redefining \HepProcess on input line 298.
  [13
 
 ]
-LaTeX Info: Redefining \HepProcess on input line 297.
-LaTeX Info: Redefining \HepProcess on input line 297.
+LaTeX Info: Redefining \HepProcess on input line 300.
+LaTeX Info: Redefining \HepProcess on input line 300.
  [14
 
 ]
-LaTeX Info: Redefining \HepProcess on input line 309.
+LaTeX Info: Redefining \HepProcess on input line 312.
  [15
 
 ]
-LaTeX Info: Redefining \HepProcess on input line 309.
+LaTeX Info: Redefining \HepProcess on input line 312.
  [16
 
 ]
-LaTeX Info: Redefining \HepProcess on input line 309.
+LaTeX Info: Redefining \HepProcess on input line 312.
  [17
 
 ]
-LaTeX Info: Redefining \HepProcess on input line 309.
+LaTeX Info: Redefining \HepProcess on input line 312.
  [18
 
 ]
-LaTeX Info: Redefining \HepProcess on input line 324.
+LaTeX Info: Redefining \HepProcess on input line 327.
  [19
 
 ]
-LaTeX Info: Redefining \HepProcess on input line 345.
+LaTeX Info: Redefining \HepProcess on input line 348.
  [20
 
 ]
-LaTeX Info: Redefining \HepProcess on input line 368.
+LaTeX Info: Redefining \HepProcess on input line 371.
  [21
 
 ]
-LaTeX Info: Redefining \HepProcess on input line 370.
-LaTeX Info: Redefining \HepProcess on input line 370.
+LaTeX Info: Redefining \HepProcess on input line 373.
+LaTeX Info: Redefining \HepProcess on input line 373.
  [22
 
 ]
-<figures/qubits.png, id=217, 1167.36125pt x 577.15625pt>
+<figures/qubits.png, id=219, 1167.36125pt x 577.15625pt>
 File: figures/qubits.png Graphic file (type png)
 <use figures/qubits.png>
-Package pdftex.def Info: figures/qubits.png  used on input line 374.
+Package pdftex.def Info: figures/qubits.png  used on input line 377.
 (pdftex.def)             Requested size: 398.3386pt x 196.94386pt.
-LaTeX Info: Redefining \HepProcess on input line 374.
+LaTeX Info: Redefining \HepProcess on input line 377.
  [23
 
  <./figures/qubits.png>]
-LaTeX Info: Redefining \HepProcess on input line 400.
+LaTeX Info: Redefining \HepProcess on input line 403.
  [24
 
 ]
-Overfull \hbox (11.73746pt too wide) detected at line 437
+Overfull \hbox (11.73746pt too wide) detected at line 440
 \OML/cmm/m/it/10.95 r[] \OT1/cmr/m/n/10.95 = [] \OML/cmm/m/it/10.95 ^^R [] ^^^  r[] \OT1/cmr/m/n/10.95 = [] \OML/cmm/m/it/10.95 ^^R [] ^^^  r[] \OT1/cmr/m/n/10.95 = [] \OML/cmm/m/it/10.95 ^^R
  []
 
-<figures/Bloch_sphere.png, id=229, 642.4pt x 683.55376pt>
+<figures/Bloch_sphere.png, id=231, 642.4pt x 683.55376pt>
 File: figures/Bloch_sphere.png Graphic file (type png)
 <use figures/Bloch_sphere.png>
-Package pdftex.def Info: figures/Bloch_sphere.png  used on input line 437.
+Package pdftex.def Info: figures/Bloch_sphere.png  used on input line 440.
 (pdftex.def)             Requested size: 159.333pt x 169.53209pt.
 
-Overfull \vbox (6.83311pt too high) detected at line 437
+Overfull \vbox (6.83311pt too high) detected at line 440
  []
 
-LaTeX Info: Redefining \HepProcess on input line 437.
+LaTeX Info: Redefining \HepProcess on input line 440.
 [25
 
  <./figures/Bloch_sphere.png>]
-LaTeX Info: Redefining \HepProcess on input line 462.
+LaTeX Info: Redefining \HepProcess on input line 465.
  [26
 
 ]
-LaTeX Info: Redefining \HepProcess on input line 477.
+LaTeX Info: Redefining \HepProcess on input line 480.
  [27
 
 ]
-LaTeX Info: Redefining \HepProcess on input line 508.
+LaTeX Info: Redefining \HepProcess on input line 511.
  [28
 
 ]
-<figures/Quantum_Logic_Gates_1.png, id=253, 501.875pt x 298.11375pt>
+<figures/Quantum_Logic_Gates_1.png, id=255, 501.875pt x 298.11375pt>
 File: figures/Quantum_Logic_Gates_1.png Graphic file (type png)
 <use figures/Quantum_Logic_Gates_1.png>
-Package pdftex.def Info: figures/Quantum_Logic_Gates_1.png  used on input line 517.
+Package pdftex.def Info: figures/Quantum_Logic_Gates_1.png  used on input line 520.
 (pdftex.def)             Requested size: 398.3386pt x 236.6263pt.
 
-Overfull \vbox (8.92012pt too high) detected at line 517
+Overfull \vbox (8.92012pt too high) detected at line 520
  []
 
-LaTeX Info: Redefining \HepProcess on input line 517.
+LaTeX Info: Redefining \HepProcess on input line 520.
 [29
 
  <./figures/Quantum_Logic_Gates_1.png>]
-LaTeX Info: Redefining \HepProcess on input line 576.
+LaTeX Info: Redefining \HepProcess on input line 579.
  [30
 
 ]
-LaTeX Info: Redefining \HepProcess on input line 601.
+LaTeX Info: Redefining \HepProcess on input line 604.
  [31
 
 ]
-<figures/two_qubits_gates.png, id=271, 948.54375pt x 434.62375pt>
+<figures/two_qubits_gates.png, id=273, 948.54375pt x 434.62375pt>
 File: figures/two_qubits_gates.png Graphic file (type png)
 <use figures/two_qubits_gates.png>
-Package pdftex.def Info: figures/two_qubits_gates.png  used on input line 607.
+Package pdftex.def Info: figures/two_qubits_gates.png  used on input line 610.
 (pdftex.def)             Requested size: 398.3386pt x 182.52083pt.
-LaTeX Info: Redefining \HepProcess on input line 607.
+LaTeX Info: Redefining \HepProcess on input line 610.
  [32
 
  <./figures/two_qubits_gates.png>]
-<figures/cnot.png, id=278, 650.43pt x 189.70876pt>
+<figures/cnot.png, id=280, 650.43pt x 189.70876pt>
 File: figures/cnot.png Graphic file (type png)
 <use figures/cnot.png>
-Package pdftex.def Info: figures/cnot.png  used on input line 628.
+Package pdftex.def Info: figures/cnot.png  used on input line 631.
 (pdftex.def)             Requested size: 199.1693pt x 58.0912pt.
-LaTeX Info: Redefining \HepProcess on input line 628.
+LaTeX Info: Redefining \HepProcess on input line 631.
  [33
 
  <./figures/cnot.png>]
-LaTeX Info: Redefining \HepProcess on input line 653.
+LaTeX Info: Redefining \HepProcess on input line 656.
  [34
 
 ]
-LaTeX Info: Redefining \HepProcess on input line 671.
+LaTeX Info: Redefining \HepProcess on input line 674.
  [35
 
 ]
-LaTeX Info: Redefining \HepProcess on input line 696.
+LaTeX Info: Redefining \HepProcess on input line 699.
  [36
 
 ]
-LaTeX Info: Redefining \HepProcess on input line 717.
+LaTeX Info: Redefining \HepProcess on input line 720.
  [37
 
 ]
-LaTeX Info: Redefining \HepProcess on input line 717.
+LaTeX Info: Redefining \HepProcess on input line 720.
  [38
 
 ]
-LaTeX Info: Redefining \HepProcess on input line 740.
+LaTeX Info: Redefining \HepProcess on input line 743.
  [39
 
 ]
-LaTeX Info: Redefining \HepProcess on input line 740.
+LaTeX Info: Redefining \HepProcess on input line 743.
  [40
 
 ]
-LaTeX Info: Redefining \HepProcess on input line 740.
+LaTeX Info: Redefining \HepProcess on input line 743.
  [41
 
 ]
-LaTeX Info: Redefining \HepProcess on input line 740.
+LaTeX Info: Redefining \HepProcess on input line 743.
  [42
 
 ]
-LaTeX Info: Redefining \HepProcess on input line 742.
-LaTeX Info: Redefining \HepProcess on input line 742.
+LaTeX Info: Redefining \HepProcess on input line 745.
+LaTeX Info: Redefining \HepProcess on input line 745.
  [43
 
 ]
-LaTeX Info: Redefining \HepProcess on input line 760.
+LaTeX Info: Redefining \HepProcess on input line 763.
  [44
 
 ]
-<figures/copy_classical.png, id=344, 475.7775pt x 286.06876pt>
+<figures/copy_classical.png, id=346, 475.7775pt x 286.06876pt>
 File: figures/copy_classical.png Graphic file (type png)
 <use figures/copy_classical.png>
-Package pdftex.def Info: figures/copy_classical.png  used on input line 769.
+Package pdftex.def Info: figures/copy_classical.png  used on input line 772.
 (pdftex.def)             Requested size: 199.1693pt x 119.7552pt.
-LaTeX Info: Redefining \HepProcess on input line 769.
+LaTeX Info: Redefining \HepProcess on input line 772.
  [45
 
  <./figures/copy_classical.png>]
-LaTeX Info: Redefining \HepProcess on input line 789.
+LaTeX Info: Redefining \HepProcess on input line 792.
  [46
 
 ]
-LaTeX Info: Redefining \HepProcess on input line 808.
+LaTeX Info: Redefining \HepProcess on input line 811.
  [47
 
 ]
-<figures/bell_circuit.png, id=361, 638.385pt x 176.66pt>
+<figures/bell_circuit.png, id=363, 638.385pt x 176.66pt>
 File: figures/bell_circuit.png Graphic file (type png)
 <use figures/bell_circuit.png>
-Package pdftex.def Info: figures/bell_circuit.png  used on input line 828.
+Package pdftex.def Info: figures/bell_circuit.png  used on input line 831.
 (pdftex.def)             Requested size: 199.1693pt x 55.11446pt.
 
 
 Package multicol Warning: multicols* inside a box does not make sense.
-(multicol)                Going to balance anyway on input line 828.
+(multicol)                Going to balance anyway on input line 831.
 
-LaTeX Info: Redefining \HepProcess on input line 828.
+LaTeX Info: Redefining \HepProcess on input line 831.
 [48
 
  <./figures/bell_circuit.png>]
-LaTeX Info: Redefining \HepProcess on input line 829.
-LaTeX Info: Redefining \HepProcess on input line 829.
+LaTeX Info: Redefining \HepProcess on input line 832.
+LaTeX Info: Redefining \HepProcess on input line 832.
  [49
 
 ]
-LaTeX Info: Redefining \HepProcess on input line 851.
+LaTeX Info: Redefining \HepProcess on input line 854.
  [50
 
 ]
-LaTeX Info: Redefining \HepProcess on input line 862.
+LaTeX Info: Redefining \HepProcess on input line 865.
  [51
 
 ]
-LaTeX Info: Redefining \HepProcess on input line 885.
+LaTeX Info: Redefining \HepProcess on input line 888.
  [52
 
 ]
-<figures/deutsch.png, id=392, 740.7675pt x 296.10625pt>
+<figures/deutsch.png, id=394, 740.7675pt x 296.10625pt>
 File: figures/deutsch.png Graphic file (type png)
 <use figures/deutsch.png>
-Package pdftex.def Info: figures/deutsch.png  used on input line 905.
+Package pdftex.def Info: figures/deutsch.png  used on input line 908.
 (pdftex.def)             Requested size: 199.1693pt x 79.61089pt.
-LaTeX Info: Redefining \HepProcess on input line 905.
+LaTeX Info: Redefining \HepProcess on input line 908.
  [53
 
  <./figures/deutsch.png>]
 File: figures/deutsch.png Graphic file (type png)
 <use figures/deutsch.png>
-Package pdftex.def Info: figures/deutsch.png  used on input line 905.
+Package pdftex.def Info: figures/deutsch.png  used on input line 908.
 (pdftex.def)             Requested size: 199.1693pt x 79.61089pt.
-LaTeX Info: Redefining \HepProcess on input line 905.
+LaTeX Info: Redefining \HepProcess on input line 908.
  [54
 
 ]
-LaTeX Info: Redefining \HepProcess on input line 926.
+LaTeX Info: Redefining \HepProcess on input line 929.
  [55
 
 ]
-LaTeX Info: Redefining \HepProcess on input line 939.
+LaTeX Info: Redefining \HepProcess on input line 942.
  [56
 
 ]
 
 Package multicol Warning: multicols* inside a box does not make sense.
-(multicol)                Going to balance anyway on input line 975.
+(multicol)                Going to balance anyway on input line 978.
 
-LaTeX Info: Redefining \HepProcess on input line 975.
+LaTeX Info: Redefining \HepProcess on input line 978.
 [57
 
 ]
-LaTeX Info: Redefining \HepProcess on input line 977.
-LaTeX Info: Redefining \HepProcess on input line 977.
+LaTeX Info: Redefining \HepProcess on input line 980.
+LaTeX Info: Redefining \HepProcess on input line 980.
  [58
 
 ]
-LaTeX Info: Redefining \HepProcess on input line 994.
+LaTeX Info: Redefining \HepProcess on input line 997.
  [59
 
 ]
-<figures/variational.png, id=431, 1473.505pt x 424.58624pt>
+<figures/variational.png, id=433, 1473.505pt x 424.58624pt>
 File: figures/variational.png Graphic file (type png)
 <use figures/variational.png>
-Package pdftex.def Info: figures/variational.png  used on input line 1010.
+Package pdftex.def Info: figures/variational.png  used on input line 1013.
 (pdftex.def)             Requested size: 398.3386pt x 114.77586pt.
-LaTeX Info: Redefining \HepProcess on input line 1010.
+LaTeX Info: Redefining \HepProcess on input line 1013.
  [60
 
  <./figures/variational.png>]
-<figures/optimal.png, id=438, 608.2725pt x 502.87875pt>
+<figures/optimal.png, id=440, 608.2725pt x 502.87875pt>
 File: figures/optimal.png Graphic file (type png)
 <use figures/optimal.png>
-Package pdftex.def Info: figures/optimal.png  used on input line 1037.
+Package pdftex.def Info: figures/optimal.png  used on input line 1040.
 (pdftex.def)             Requested size: 199.1693pt x 164.6537pt.
-LaTeX Info: Redefining \HepProcess on input line 1037.
+LaTeX Info: Redefining \HepProcess on input line 1040.
  [61
 
  <./figures/optimal.png>]
-LaTeX Info: Redefining \HepProcess on input line 1044.
-LaTeX Info: Redefining \HepProcess on input line 1044.
+LaTeX Info: Redefining \HepProcess on input line 1047.
+LaTeX Info: Redefining \HepProcess on input line 1047.
  [62
 
 ]
-<figures/q_technologies.jpg, id=451, 963.6pt x 415.5525pt>
+<figures/q_technologies.jpg, id=453, 963.6pt x 415.5525pt>
 File: figures/q_technologies.jpg Graphic file (type jpg)
 <use figures/q_technologies.jpg>
-Package pdftex.def Info: figures/q_technologies.jpg  used on input line 1051.
+Package pdftex.def Info: figures/q_technologies.jpg  used on input line 1054.
 (pdftex.def)             Requested size: 398.3386pt x 171.77895pt.
-LaTeX Info: Redefining \HepProcess on input line 1051.
+LaTeX Info: Redefining \HepProcess on input line 1054.
  [63
 
  <./figures/q_technologies.jpg>]
-<figures/quantum_computer.jpeg, id=457, 1445.4pt x 816.04875pt>
+<figures/quantum_computer.jpeg, id=459, 1445.4pt x 816.04875pt>
 File: figures/quantum_computer.jpeg Graphic file (type jpg)
 <use figures/quantum_computer.jpeg>
-Package pdftex.def Info: figures/quantum_computer.jpeg  used on input line 1058.
+Package pdftex.def Info: figures/quantum_computer.jpeg  used on input line 1061.
 (pdftex.def)             Requested size: 398.3386pt x 224.8935pt.
-LaTeX Info: Redefining \HepProcess on input line 1058.
+LaTeX Info: Redefining \HepProcess on input line 1061.
  [64
 
  <./figures/quantum_computer.jpeg>]
 
 Package multicol Warning: multicols* inside a box does not make sense.
-(multicol)                Going to balance anyway on input line 1073.
+(multicol)                Going to balance anyway on input line 1076.
 
-<figures/superconducting_qubits.png, id=464, 399.74344pt x 405.76593pt>
+<figures/superconducting_qubits.png, id=466, 399.74344pt x 405.76593pt>
 File: figures/superconducting_qubits.png Graphic file (type png)
 <use figures/superconducting_qubits.png>
-Package pdftex.def Info: figures/superconducting_qubits.png  used on input line 1073.
+Package pdftex.def Info: figures/superconducting_qubits.png  used on input line 1076.
 (pdftex.def)             Requested size: 119.50279pt x 121.2973pt.
-<figures/ion_trap.jpeg, id=465, 273.02pt x 185.69376pt>
+<figures/ion_trap.jpeg, id=467, 273.02pt x 185.69376pt>
 File: figures/ion_trap.jpeg Graphic file (type jpg)
 <use figures/ion_trap.jpeg>
-Package pdftex.def Info: figures/ion_trap.jpeg  used on input line 1073.
+Package pdftex.def Info: figures/ion_trap.jpeg  used on input line 1076.
 (pdftex.def)             Requested size: 119.50279pt x 81.28047pt.
-LaTeX Info: Redefining \HepProcess on input line 1073.
+LaTeX Info: Redefining \HepProcess on input line 1076.
 [65
 
  <./figures/superconducting_qubits.png> <./figures/ion_trap.jpeg>]
-<figures/nisq.png, id=472, 856.19875pt x 401.5pt>
+<figures/nisq.png, id=474, 856.19875pt x 401.5pt>
 File: figures/nisq.png Graphic file (type png)
 <use figures/nisq.png>
-Package pdftex.def Info: figures/nisq.png  used on input line 1079.
+Package pdftex.def Info: figures/nisq.png  used on input line 1082.
 (pdftex.def)             Requested size: 398.3386pt x 186.79358pt.
-LaTeX Info: Redefining \HepProcess on input line 1079.
+LaTeX Info: Redefining \HepProcess on input line 1082.
  [66
 
  <./figures/nisq.png>]
-LaTeX Info: Redefining \HepProcess on input line 1081.
-LaTeX Info: Redefining \HepProcess on input line 1081.
+LaTeX Info: Redefining \HepProcess on input line 1084.
+LaTeX Info: Redefining \HepProcess on input line 1084.
  [67
 
 ]
-<figures/intro.png, id=485, 1610.015pt x 1214.5375pt>
+<figures/intro.png, id=487, 1610.015pt x 1214.5375pt>
 File: figures/intro.png Graphic file (type png)
 <use figures/intro.png>
-Package pdftex.def Info: figures/intro.png  used on input line 1089.
+Package pdftex.def Info: figures/intro.png  used on input line 1092.
 (pdftex.def)             Requested size: 398.3386pt x 300.48314pt.
 
-Overfull \vbox (51.66203pt too high) detected at line 1089
+Overfull \vbox (51.66203pt too high) detected at line 1092
  []
 
-LaTeX Info: Redefining \HepProcess on input line 1089.
+LaTeX Info: Redefining \HepProcess on input line 1092.
 [68
 
  <./figures/intro.png>]
-<figures/Qibo.png, id=492, 1688.3075pt x 1069.9975pt>
+<figures/Qibo.png, id=494, 1688.3075pt x 1069.9975pt>
 File: figures/Qibo.png Graphic file (type png)
 <use figures/Qibo.png>
-Package pdftex.def Info: figures/Qibo.png  used on input line 1097.
+Package pdftex.def Info: figures/Qibo.png  used on input line 1100.
 (pdftex.def)             Requested size: 398.3386pt x 252.44537pt.
 
-Overfull \vbox (17.13556pt too high) detected at line 1097
+Overfull \vbox (17.13556pt too high) detected at line 1100
  []
 
-LaTeX Info: Redefining \HepProcess on input line 1097.
+LaTeX Info: Redefining \HepProcess on input line 1100.
 [69
 
  <./figures/Qibo.png>]
-LaTeX Info: Redefining \HepProcess on input line 1099.
-LaTeX Info: Redefining \HepProcess on input line 1099.
+LaTeX Info: Redefining \HepProcess on input line 1102.
+LaTeX Info: Redefining \HepProcess on input line 1102.
  [70
 
 ]
@@ -1687,18 +1698,18 @@ Package rerunfilecheck Info: File `talk.out' has not changed.
 (rerunfilecheck)             Checksum: DFA6A19B08BCF23EDEB66BA70F61B7DF;1615.
  ) 
 Here is how much of TeX's memory you used:
- 45017 strings out of 478287
- 946919 string characters out of 5849290
- 1202456 words of memory out of 5000000
- 62194 multiletter control sequences out of 15000+600000
+ 45024 strings out of 478287
+ 947013 string characters out of 5849290
+ 1202556 words of memory out of 5000000
+ 62200 multiletter control sequences out of 15000+600000
  501744 words of font info for 110 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,30n,122p,1838b,1800s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfsi1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfss0600.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfss0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfss0900.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfss1000.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfss1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfss1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfsx0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfsx0900.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfsx1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfsx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfsx1440.pfb>
-Output written on talk.pdf (70 pages, 2038084 bytes).
+Output written on talk.pdf (70 pages, 2029466 bytes).
 PDF statistics:
- 656 PDF objects out of 1000 (max. 8388607)
+ 658 PDF objects out of 1000 (max. 8388607)
  477 compressed objects within 5 object streams
  150 named destinations out of 1000 (max. 500000)
- 230 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 235 words of extra memory for PDF output out of 10000 (max. 10000000)
 
