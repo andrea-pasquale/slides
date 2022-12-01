@@ -1,0 +1,19 @@
+\frametitle{Qibojit - Example}
+
+    \begin{columns}
+        \begin{column}{0.7\textwidth}
+            \hspace{1cm}
+            \includegraphics[width = 0.8\textwidth]{figures/circuit.png}
+        \end{column}
+
+        \begin{column}{0.6\textwidth}
+            Observations
+            \begin{itemize}
+                \item \texttt{@njit}
+                \item \texttt{prange}
+                \item fast binary operations
+            \end{itemize}
+        \end{column}
+    \end{columns}
+
+
