@@ -1,0 +1,6 @@
+\babel@toc {english}{}\relax 
+\beamer@sectionintoc {1}{Problem: event generation at LHC}{3}{0}{1}
+\beamer@sectionintoc {2}{Methodology}{6}{0}{2}
+\beamer@sectionintoc {3}{Results}{12}{0}{3}
+\beamer@sectionintoc {4}{Result on Quantum Hardware}{23}{0}{4}
+\beamer@sectionintoc {5}{Outlook}{29}{0}{5}

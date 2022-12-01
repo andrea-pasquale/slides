@@ -1,0 +1,23 @@
+\frametitle{Qibojit - Example}
+
+    \begin{columns}
+        \begin{column}{0.7\textwidth}
+            \hspace{1cm}
+            \includegraphics[width = 0.8\textwidth]{figures/circuit.png}
+        \end{column}
+
+        \begin{column}{0.6\textwidth}
+            To further speed up:
+            \begin{itemize}
+                \item \emph{in-place updates}
+                \item exploit sparsity of matrices
+                \item specialized operators for:
+                \begin{itemize}
+                    \item single qubit gate: X, Y Z
+                    \item two qubit gates: SWAP
+                \end{itemize}
+            \end{itemize}
+        \end{column}
+    \end{columns}
+
+

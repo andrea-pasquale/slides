@@ -1,0 +1,8 @@
+\babel@toc {english}{}\relax 
+\beamer@sectionintoc {1}{Introducing Qibo}{4}{0}{1}
+\beamer@sectionintoc {2}{Hardware control using Qibo}{9}{0}{2}
+\beamer@sectionintoc {3}{A reporting tool for calibration using Qibo}{12}{0}{3}
+\beamer@sectionintoc {4}{Applications}{21}{0}{4}
+\beamer@sectionintoc {5}{Thanks for listening!}{24}{0}{5}
+\beamer@sectionintoc {6}{Backup Slides}{25}{0}{6}
+\beamer@sectionintoc {7}{How can we implement physical qubits?}{26}{0}{7}
