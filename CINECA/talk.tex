@@ -24,6 +24,7 @@
 \usepackage[export]{adjustbox}
 \usepackage{multicol}
 \usepackage{wrapfig}
+% \usepackage{enumitem}
 \usetikzlibrary{quantikz}
 % in documenet
 
@@ -58,12 +59,18 @@
 \title{Introducing Qibo}
 \subtitle{An open-source full stack API for quantum simulation and hardware control}
 \author{Andrea Pasquale and Stavros Efthymiou on the behalf of the Qibo Team}
-\date{2nd December 2022}
+\date{CINECA Practical Quantum Computing School}
+% \logo{
+% \includegraphics[width=3cm]{../logos/unimi_logo.pdf}
+% }
 \titlegraphic{
+    
     \vspace*{11.5cm}
     \raisebox{20pt}[10pt][10pt]{\includegraphics[height=4cm]{../logos/unimi_logo.pdf}}\hspace*{30pt}
-    \raisebox{20pt}[10pt][10pt]{\includegraphics[height=4cm]{../logos/tii_logo.png}}\hspace*{30pt}
-    \raisebox{20pt}[10pt][10pt]{\includegraphics[height=4cm]{../logos/infn_logo.png}}\hspace*{30pt}
+    \raisebox{20pt}[10pt][10pt]{\includegraphics[height=4cm]{../logos/tii_logo.png}}\hspace*{20pt}
+    \raisebox{20pt}[1pt][10pt]{\includegraphics[height=3cm]{figures/nvidia_logo.png}}\hspace*{30pt}
+
+    % \raisebox{20pt}[10pt][10pt]{\includegraphics[height=2cm]{figures/nvidia_logo.png}}\hspace*{0pt}
     % \includegraphics[height=1.3cm]{../_logos/erc_logo1.png}
 
     % \vfill\vspace*{230pt}
@@ -74,7 +81,7 @@
     %     \fontsize{3pt}{3.5pt}\selectfont
     %     \begin{center}
     %         This project has received funding from the European Union's Horizon
-    %         2020 research and innovation programme under grant agreement No
+    %         2020 research and innovation program under grant agreement No
     %         % 740006\quad \includegraphics[height=5pt]{../_logos/eu-flag.jpg}
     %     \end{center}
     % }
@@ -85,30 +92,39 @@
 
 \maketitle
 
-% \begin{frame}{Outline}
-%     Using a quantum device is not easy 
-% \end{frame}
+\begin{frame}{Outline of this session}
+    \begin{enumerate}
+        \item  Introduction to Qibo
+        \item Tutorial on how to use Qibo
+        \item Exercise: Grover's algorithm
+        \item Your turn to solve the exercise
+        \item Explanation of the solution
+        \item Implementation of the solution on GPU
+    \end{enumerate}
+    
+\end{frame}
 
-% \begin{frame}
-%     \begin{figure}
-%         \includegraphics[width=\textwidth]{figures/map.png}
-%     \end{figure}
-%     % \begin{columns}
-%     %     \begin{column}[0.5 \textwidth]
-%         \begin{multicols}{2}
-%             \begin{itemize}
-%                 \item Chips with 1 and 5 qubits at TII
-%                 \item Chips with 1 and 2 qubits at Qilimanjaro
-%                 \item Chip with 1 qubit in Italy (soon)
-%                 \item Chips with up to 10 qubits at CQT
-%             \end{itemize}
-%         \end{multicols}
-%     %     \end{column}
-%     %     \begin{column}[0.5 \textwidth]
-%     %         test
-%     %     \end{column}
-%     % \end{columns}
-% \end{frame}
+% \section{Introduction to Qibo}
+
+\begin{frame}
+    \begin{figure}
+        \includegraphics[width=\textwidth]{figures/map.png}
+    \end{figure}
+    % \begin{columns}
+    %     \begin{column}[0.5 \textwidth]
+        \begin{table}
+            \centering
+            \begin{tabular}{lcccc}
+                \toprule
+                \textbf{Institute} & TII & CQT & INFN & Qilimajiaro\\
+                \midrule
+                \textbf{Quantum Hardware} & 5 qubits & 10 qubits & 1 qubit & 2 qubits \\
+                \bottomrule
+            \end{tabular}
+            % \caption{Versions of Qibo and its dependencies used in the benchmarks.}
+            \label{tab:qibo_versions}
+            \end{table}
+\end{frame}
 
 \section{Quantum Computing and HPC}
 
@@ -127,37 +143,82 @@
     \{0,1\}$.
 \end{frame}
 
-\begin{frame}{Example}
+\begin{frame}{A few gates}
+    \begin{columns}
+        \begin{column}{0.5 \textwidth}
+            \includegraphics[height = 0.8 \textheight]{figures/gates.png}
+        \end{column}
+        \begin{column}{0.5 \textwidth}
+            \begin{itemize}
+                \item 1 qubit gates 2x2 matrices
+                \item 2 qubit gates 4x4 matrices
+                \item 3 qubit gates 8x8 matrices
+            \end{itemize}
+        \end{column}
+    \end{columns}
+
 \end{frame}
 
 
-\begin{frame}{What can go wrong?}
+\begin{frame}{Why is it difficult to implement a good quantum simulator?}
 
-    The main issue when building a quantum simulator is the exponential scaling.
+    From the previous slides we can understand that 
+    \begin{center}
+    
+        good \textbf{quantum circuits} simulator $\rightleftarrows$ good engine to perform \textbf{matrix multiplication}
+    \end{center}
+    
+    Moreover, when it comes to full-state vector simulation we need to store to
+    full state vector in the RAM.
 
-    From a coding point of view we need to take care of the following:
+    How much memory it is required if we increase the size of the state vector?
 
-    \pause
-    \begin{itemize}
-        \item Storing in the RAM the state vector
-        \pause
-        \item Implement efficiently linear algebra operations
-    \end{itemize}
-    \pause
-    Coding a \textbf{good quantum simulator} corresponds to coding a \textbf{good engine} to perfom linear
-    algebra operations.
+    \begin{table}
+        \centering
+        \begin{tabular}{lcc}
+            \toprule
+            \textbf{Qubits} & single precision & double precision \\
+            \midrule
+            10 & 8 kB & 16 kB \\
+            20 & 8 MB & 16 MB \\
+            30 & 8.59 GB & 17.18 GB \\
+            40 & 8.79 TB & 17.59 TB \\
+            \bottomrule
+        \end{tabular}
+        % \caption{Versions of Qibo and its dependencies used in the benchmarks.}
+        \label{tab:qibo_versions}
+        \end{table}
 
-    $\Rightarrow $  HPC comes into play.
+
+    
+    % \begin{itemize}
+    %     \item Software level: implement custom operators for gate application
+    %     \item Hardware level:
+    % \end{itemize}
+
+    % From a coding point of view we need to take care of the following:
+
+    % \pause
+    % \begin{itemize}
+    %     \item Storing the state vector in the RAM
+    %     \pause
+    %     \item Implement efficiently linear algebra operations
+    % \end{itemize}
+    % \pause
+    % Coding a \textbf{good quantum simulator} corresponds to coding a \textbf{good engine} to perfom linear
+    % algebra operations.
+
+    % $\Rightarrow $  HPC comes into play.
     
 \end{frame}
 
-\begin{frame}{Challenge}
-    \begin{figure}
-        \includegraphics[width=\textwidth]{figures/intro.png}
-    \end{figure}
-    \centering
-    \emph{Is to possible to create from scratch a framework for all of this?}
-\end{frame}
+% \begin{frame}{Challenge}
+%     \begin{figure}
+%         \includegraphics[width=\textwidth]{figures/intro.png}
+%     \end{figure}
+%     \centering
+%     \emph{Is to possible to create from scratch a framework for all of this?}
+% \end{frame}
 
 \section{Introducing Qibo}
 
@@ -168,58 +229,20 @@
     \end{figure}
     
 \end{frame}
-% \begin{frame}{A modular framework for quantum computing}
-%     \begin{figure}
-%         \includegraphics[width= \textwidth]{figures/backends.png}
-%     \end{figure}
-% \end{frame}
+
 
 \begin{frame}{Simulation backends in Qibo}
-    As already done in many quantum simulation library, Qibo provides multiple backends for
-    simulating quantum circuit, i.e. to perform the matrix multiplication of Eq. REF.
-    
-    The Qibo package is shipped with two basic simulators: \texttt{numpy} and \texttt{tensorflow}.
-    
-    \begin{columns}
-        \begin{column}{0.5 \textwidth}
-            \texttt{numpy}
-        \end{column}
-        \begin{column}{0.5 \textwidth}
-            \texttt{tensorflow}
-        \end{column}
-    \end{columns}
+    Qibo provides multiple backends for
+    simulating quantum circuits:
+
+    \begin{figure}
+        \includegraphics[width = \textwidth]{figures/backends.png}
+    \end{figure}
+
+    Qibo has a modular layout that enables to switch between different backends easily.
+
+    Let's take a closer look at each backend...
 \end{frame}
-
-% \begin{frame}{Introducing Qibojit}
-%     Matrix multiplication to simulate circuits:
-
-%     \begin{equation*}\label{eq:gateapplication}
-%         \psi'(\sigma_1, \ldots, \sigma_n) = \sum _{\boldsymbol{\tau'}} G(\boldsymbol{\tau}, \boldsymbol{\tau'})\psi(\sigma_1,\ldots,\boldsymbol{\tau'},\ldots,\sigma_n) \ .
-%     \end{equation*}
-
-    
-    
-%     { \color{red} \faClose}  Number of operations scales { \color{red} exponentially} with the number of qubits!
-   
-%     We need more sophisticated backends to perform simulation:
-%     \begin{itemize}
-%         \item[{ \color{red} \faClose}] \texttt{NumpyBackend} : { \color{blue} Numpy} tensors and primitives
-%         \item[{ \color{red} \faClose}] \texttt{TensorFlowBackend} : { \color{orange} Tensorflow} tensors and primitives
-%         \item[{ \color{green} \faCheck}] \texttt{QibojitBackend} : Just-In-time
-%         \item[]     \begin{itemize}
-%             \item[\faCode] CPU : { \color{blue} Numpy} tensor + custom operations with {\color{cyan} Numba JIT}
-%             \item[\faCode] GPU(S) : {\color{teal} Cupy} tensors + custom operations using
-%             \begin{itemize}
-%                 \item  {\color{teal} Cupy JIT} Raw kernels
-%                 \item  {\color{green} NVIDIA cuQuantum}  API
-%             \end{itemize} 
-%         \end{itemize}
-%     \end{itemize}
-
-%     Paper published on Quantum: \url{https://quantum-journal.org/papers/q-2022-09-22-814/}
-
-    
-% \end{frame}
 
 \begin{frame}{Numpy Backend}
     \begin{multicols*}{2}
@@ -253,7 +276,7 @@
         Simulator based on \texttt{tensorflow} primitives:
     \begin{itemize}
         \item \texttt{tf.Tensor}
-        \item  \texttt{tf.matmul} and \texttt{tf.matmul}
+        \item  \texttt{tf.matmul} and \texttt{tf.einsum}
     \end{itemize}
     \begin{figure}
         \includegraphics[width=0.3 \textwidth]{figures/tensorflow.jpg}
@@ -281,9 +304,9 @@
 
     \begin{multicols*}{2}
         \begin{itemize}        
-        \item Increasing the computational times
+        \item Exponential scaling
         \item Tensorflow better than numpy
-        \item GPU helps!
+        \item GPU architecture helps with large number of qubits
     \end{itemize}
     \end{multicols*}
 
@@ -291,16 +314,16 @@
 
 \begin{frame}{Can we do better than this?}
     To efficiently simulate circuits with large number of qubits we designed
-    a new backend \textbf{qibojit}.
+    a new backend in Qibo based on JIT compilation: \textbf{qibojit}.
 
 
-    \includegraphics[width=\textwidth]{figures/Qibojit.pdf}
+    \includegraphics[width= \textwidth]{figures/Qibojit.png}
     
     \textbf{FEATURES}
     \begin{multicols*}{2}
         \begin{itemize}
             \item \emph{in-place} updates 
-            \item exploit \emph{sparsity of matrix}
+            \item exploit \emph{sparsity of matrices}
             \item Just-in-Time compilation
             \item CuQuantum compatibility
         \end{itemize}
@@ -312,33 +335,31 @@
 
     JIT: a method for improving the performance of interpreted programs.
 
-    \textbf{Static compiler}: reads a programme, looks at the code and tries 
-    to convert it into machine code
+    When compiling/interpreting a language we have different options:
 
-    \textbf{Interpreter}: looks at the programme, does not convert to machine
-    code and it execute it almost as it is
+    \begin{itemize}
+        \item \textbf{Static compiler}: reads a program, looks at the code and tries 
+        to convert it into machine code. Examples: C, C++.
 
-    \textbf{Just-in-Time compiler}: starts a programme running an interpreter
-    and dynamically produce machine code based on the observation of the programme
+         \item \textbf{Interpreter}: looks at the program, does not convert to machine
+    code and it executes it almost as it is. Examples: Python, JavaScript
 
-    JIT compilers can be \textbf{faster} than a static compiler because they can get
-    more information by running the programme instead of just looking at the
-    programme at compile time! 
+        \item \textbf{Just-in-Time compiler}: starts a program running an interpreter
+    and dynamically produce machine code based on the observation of the program.
+    Examples: Python, JavaScript
+    \end{itemize}
+    
 
-    INTRODUCE DRY RUN vs SIMULATION TIME
+    JIT compilers can be \textbf{faster} than static compilers because they can get
+    more information by running the program instead of just looking at the
+    program at compile time! 
+
 
     
 \end{frame}
 
-\begin{frame}{Numba example}
-    \begin{figure}
-        \includegraphics[width= \textwidth]{figures/how_numba.png}
-    \end{figure}
-    
-\end{frame}
 
-
-\begin{frame}[fragile]{Qibojit - Example}
+\begin{frame}[fragile]{Qibojit - \texttt{NumbaBackend}}
 
     \begin{columns}
         \begin{column}{0.7\textwidth}
@@ -359,7 +380,7 @@
     
 \end{frame}
 
-\begin{frame}{Qibojit GPU backends : Cupy}
+\begin{frame}{Qibojit - \texttt{CupyBackend}}
     Same approach followed using Numba: JIT compilation.
 
     Custom operators implemented using \texttt{cupy.RawKernel}:
@@ -372,30 +393,53 @@
 
 \end{frame}
 
-\begin{frame}{CuQuantum Backend}
-    Writing custom operators takes time and efforts and can be highly non-trivial.
-    Instead of writing the custom operators yourself the modular layout of Qibo
-    enable the user to write its custom backend.
+% \begin{frame}{CuQuantum Backend}
+%     Writing custom operators takes time and efforts and can be highly non-trivial.
+%     Instead of writing the custom operators yourself the modular layout of Qibo
+%     enable the user to write its custom backend.
 
-    \begin{figure}
-        \includegraphics[width= 0.6 \textwidth]{figures/backend_implementation.pdf}
-    \end{figure}
+%     \begin{figure}
+%         \includegraphics[width= 0.6 \textwidth]{figures/backend_implementation.pdf}
+%     \end{figure}
     
-    First successful application: CuQuantum Backend.
+%     First successful application: CuQuantum Backend.
 
-\end{frame}
+% \end{frame}
 
-\begin{frame}{Nvidia CuQuantum}
-    cuQuantum has a Python API which delivers all the functionalities 
-    \texttt{cuStateVec} and \texttt{cuTensorNet} with Python API.
+\begin{frame}{Qibojit - \texttt{cuQuantumBackend}}
 
-    Starting from the \texttt{Cupy} we replaced the custom operators with CuQuantum
-    primitives.
+    cuQuantum from NVIDIA has a Python API which delivers all the functionalities 
+    \texttt{cuStateVec} and \texttt{cuTensorNet}.
 
-    The compatibility with Cupy allows to fallback of the custom operators
-    of the \texttt{CupyBackend} to mantain good performance without complicating the code.
+    Thanks to the modular layout of Qibo it was possible to create a new backend
+    where the custom operators are the primitives from \texttt{cuStateVec}!
+
+   \begin{figure}
+        \includegraphics[width = \textwidth]{figures/nvidia.png}
+   \end{figure}
 
 \end{frame} 
+
+\begin{frame}{Benchmarks}
+    When benchmarking libraries which involve justin-time compilation it is important to distinguish the
+first execution, \emph{dry run} because it will involve a compilation
+or loading of cached binaries and therefore will be
+slower than subsequent executions, \emph{simulation} in the same run
+time.
+    \begin{figure}
+        \includegraphics[width=\textwidth]{figures/qibojit_dry_vs_simulation_supremacy_double.pdf}
+    \end{figure}
+\end{frame}
+
+\begin{frame}{Benchmarks}
+    \begin{figure}
+        % \includegraphics[width=0.8 \textwidth]{figures/qft.png}
+        \includegraphics[width=0.8 \textwidth]{figures/qibo_scaling_qft_total_dry_time_double.pdf} 
+    \end{figure}
+    Benchmark library: \url{https://github.com/qiboteam/qibojit-benchmarks}
+\end{frame}
+
+
 \begin{frame}{Benchmarks}
     \begin{figure}
         % \includegraphics[width=0.8 \textwidth]{figures/qft.png}
@@ -404,11 +448,13 @@
     Benchmark library: \url{https://github.com/qiboteam/qibojit-benchmarks}
 \end{frame}
 
+
+
 \begin{frame}{Benchmark on different devices}
 
             \begin{figure}
-                \includegraphics[width = 0.5 \textwidth]{figures/devices_qft_total_dry_time_double.pdf}
-                \includegraphics[width = 0.5 \textwidth]{figures/devices_qft_total_simulation_time_double.pdf}
+                %\includegraphics[width = 0.5 \textwidth]{figures/devices_qft_total_dry_time_double.pdf}
+                \includegraphics[width = 0.8 \textwidth]{figures/devices_qft_total_simulation_time_double.pdf}
             \end{figure}
     
 \end{frame}
@@ -469,165 +515,57 @@
     
 \end{frame}
 
-% \section{Hardware control using Qibo}
+\begin{frame}{How to add a new backend in Qibo?}
+    Do you think that you can develop a backend with better performances?
 
-% % \begin{frame}{Hardware control}
-% %     A quantum computer has many components outside the chip...
-% %     \includegraphics[width = \textwidth]{figures/quantum_computer.jpeg}
+    Thanks to its modular framework in Qibo it is easy to implement a new backend.
+
+    \begin{figure}
+        \includegraphics{figures/backend_implementation.pdf}
+    \end{figure}
 
 
+\end{frame}
+
+
+
+\section{Outlook}
+
+\begin{frame}{Outlook}
+    We have presented an open full stack API for quantum simulation: Qibo.
+
+    \begin{wrapfigure}{r}{0.25\textwidth}
+        \includegraphics[width=0.9\linewidth]{figures/qibo_logo.png} 
+        \end{wrapfigure}
+    \begin{itemize}
+
+
+        \item[ \color{teal} \faCheck] High-performance quantum simulation: {\color{blue} \textbf{qibojit}}
+        % \item[ \color{orange}\faCheck] Hardware control: {\color{red} \textbf{qibolab}}
+        % \item[ \color{orange} \faCheck] Hardware calibration: { \color{teal} \textbf{qcvv} }
+    \end{itemize}
+
+    What makes Qibo different from other libraries:
+    \begin{itemize}
+        \item[ \faPlus] Public available as an open source project.
+        \item[ \faPlus] Modular layout design with possibility of adding
+        \begin{itemize}
+            \item a new backend for simulation
+        \end{itemize}
+        \item[ \faPlus] Community driven effort
+    \end{itemize}
+
+    Qibo is \textbf{more} than a quantum simulator. We are currently developing modules for
     
-% % \end{frame}
+    \begin{itemize}
+        \item hardware control $\rightarrow$  \texttt{qibolab}
+        \item hardware calibration $\rightarrow$ \texttt{qibocal}
+    \end{itemize}
 
-% \begin{frame}{Hardware control}
-%     For superconducting qubits \textbf{gates} are implemented by sending \textbf{pulses}.
+    \url{https://github.com/qiboteam/qibo} \hfill \url{https://qibo.readthedocs.io/en/stable/}
+\end{frame}
 
-%     \begin{columns}
-%         \begin{column}{0.5 \textwidth}
-%             \begin{figure}
-%                 \includegraphics[height = 0.3 \textheight]{figures/rohde.jpg}
-%                 % \caption{Oscilloscope}
-%             \end{figure}
-            
-%             % \begin{itemize}
-%             %     \item Wavefunction generators
-%             %     \item Local oscillators
-%             %     \item Qblox devices
-%             %     \item Custom FPGA boards
-%             %    \end{itemize}
-%         \end{column}
-%         \begin{column}{0.5 \textwidth}
-%             % \includegraphics[height = 0.3 \textheight]{figures/rohde.jpg}
-%             \begin{figure}
-%                 \includegraphics[height = 0.3 \textheight]{figures/qblox.png}
-%                 % \caption{Qblox}
-%                 \includegraphics[height = 0.3 \textheight]{figures/fpga.png}
-%                 % \caption{FPGA board}
-%             \end{figure}
-            
-%         \end{column}
-%     \end{columns}
-  
-%    We need a framework to control all these devices at the same time.
-    
-% \end{frame}
-
-% \begin{frame}{Introducing Qibolab}
-%     \begin{columns}
-%         \begin{column}[]{0.5 \textwidth}
-%             \begin{figure}
-%                 \includegraphics[height=0.8\textheight]{figures/qibolab.png}
-%             \end{figure}
-            
-%         \end{column}
-
-%         \begin{column}[]{0.5 \textwidth}
-%             \begin{tcolorbox}[colframe=gray,title=Qibolab features:]
-%                 \begin{itemize}
-%                     \item Deploy Qibo models on quantum hardware easily
-%                     \item User-friendly Pulse API
-%                     \item Create custom experimental drivers for lab setup
-%                     \item Support multiple heterogeneous platforms
-%                 \end{itemize}
-%                 \end{tcolorbox}
-%         \end{column}
-%     \end{columns}
-% \end{frame}
-
-% \begin{frame}{How to use qibolab?}
-%     \begin{figure}
-%         \includegraphics[width=\textwidth]{figures/hardwarecircuit.png}
-%     \end{figure}
-
-%     \begin{columns}
-%         \begin{column}{0.5 \textwidth}
-%             \begin{figure}
-%                 \includegraphics[width = \columnwidth]{figures/qibo__circuit.png}
-%             \end{figure}
-%         \end{column}
-%         \begin{column}{0.5 \textwidth}
-%             \begin{itemize}
-%                 \item A single object to execute both on hardware and simulation
-%                 \item Job scheduling to access the hardware using slurm
-%             \end{itemize}
-%             \centering
-%             \includegraphics[height=2cm]{figures/Slurm_logo.svg.png}
-%         \end{column}
-%     \end{columns}
-
-% \end{frame}
-
-% \begin{frame}{Quantum Machine Learning on Real Hardware}
-% \includegraphics[width=\textwidth]{figures/cropped_qpu_not_normed..pdf}
-% \end{frame}
-
-
-
-% \section{A reporting tool for calibration using Qibo}
-
-% \begin{frame}{Difficulties}
-%     Suppose that we have assembled a quantum computer and we have a way
-%     to send pulses to the chip... are we done? {\color{red} \textbf{No} }
-
-%     We need to { \color{blue} characterize}, { \color{blue} validate} and { \color{blue} verificate} our qubits (QCVV):
-%     \begin{columns}
-%         \begin{column}{0.5 \textwidth}
-%             \vspace{-2cm}
-%             \begin{itemize}
-%                 \item[\faCaretSquareORight] Perform standard calibration routines:
-%                 \begin{itemize}
-%                     \item[\faWrench] Resonator and qubit spectroscopy
-%                     \item[\faWrench] Rabi and Ramsey 
-%                     \item[\faWrench] T1 and T2 determination
-                
-%                 \end{itemize}
-%                 \item[\faCaretSquareORight] Perform quantum protocols to extract the fidelity:
-%                 \begin{itemize}
-%                     \item[\faWrench] Randomized Benchmarking
-%                     \item[\faWrench] Gate Set Tomography
-%                     \item[\faWrench] Cross-Entropy Benchmarking
-%                 \end{itemize}
-%                 \item[\faCaretSquareORight] Repeat the above steps periodically.
-%             \end{itemize}
-%         \end{column}
-%         \begin{column}{0.5 \textwidth}
-%             \begin{figure}
-%                 \includegraphics[width = 0.8 \textwidth]{figures/characterization.png}
-%             \end{figure}
-            
-%         \end{column}
-%     \end{columns}
-    
-
-% \end{frame}
-
-% \begin{frame}{A new reporting tool for Qibo}
-%     We are developing a new tool that it will be able to perform QCVV in Qibo
-%     with the following features:
-%             \begin{multicols*}{2}
-%                 \begin{itemize}
-%                     \item[\faCaretSquareORight] Platform agnostic
-%                     \item[\faCaretSquareORight] Launch calibration routine easily
-%                     \item[\faCaretSquareORight] Live-plotting tools
-%                     \item[\faCaretSquareORight] Live-fitting tools
-%                     \item[\faCaretSquareORight]Save and share your data
-%                     \item[\faCaretSquareORight] Autocalibration routines
-%                 \end{itemize}
-%             \end{multicols*}
-%             \includegraphics[width=\textwidth]{figures/resonator.png}
-            
-
-   
-% \end{frame}
-
-% \begin{frame}{Report example}
-    
-%     \begin{figure}
-%         \includegraphics[width=\textwidth]{figures/qcvv.png}
-%         % \includegraphics[width=\textwidth]{figures/punchout.png}
-%     \end{figure}
-    
-% \end{frame}
+\section{Thanks for listening!}
 
 \section{Grover's algorithm}
 
@@ -769,31 +707,176 @@ The diffuser implements an inversion about the average.
 \end{frame}
 
 
-\section{Outlook}
 
-\begin{frame}{Outlook}
-    Qibo is growing to accomodate different tasks:
-    \begin{wrapfigure}{r}{0.25\textwidth}
-        \includegraphics[width=0.9\linewidth]{figures/qibo_logo.png} 
-        \end{wrapfigure}
-    \begin{itemize}
-        \item[ \color{teal} \faCheck] High-performance quantum simulation: {\color{blue} \textbf{qibojit}}
-        \item[ \color{orange}\faCheck] Hardware control: {\color{red} \textbf{qibolab}}
-        \item[ \color{orange} \faCheck] Hardware calibration: { \color{teal} \textbf{qcvv} }
-    \end{itemize}
 
-    What makes Qibo different from other libraries:
-    \begin{itemize}
-        \item[ \faPlus] Public available as an open source project.
-        \item[ \faPlus] Modular layout design with possibility of adding
-        \begin{itemize}
-            \item a new backend for simulation
-            \item a new platform for hardware control
-        \end{itemize}
-        \item[ \faPlus] Community driven effort
-    \end{itemize}
 
-    \url{https://github.com/qiboteam/qibo} \hfill \url{https://qibo.readthedocs.io/en/stable/}
+\section{Backup slides}
+
+\begin{frame}{Example of JIT}
+    \begin{figure}
+        \includegraphics[width= \textwidth]{figures/how_numba.png}
+    \end{figure}
+    
 \end{frame}
-\section{Thanks for listening!}
+
+\section{Hardware control using Qibo}
+
+% \begin{frame}{Hardware control}
+%     A quantum computer has many components outside the chip...
+%     \includegraphics[width = \textwidth]{figures/quantum_computer.jpeg}
+
+
+    
+% \end{frame}
+
+\begin{frame}{Hardware control}
+    For superconducting qubits \textbf{gates} are implemented by sending \textbf{pulses}.
+
+    \begin{columns}
+        \begin{column}{0.5 \textwidth}
+            \begin{figure}
+                \includegraphics[height = 0.3 \textheight]{figures/rohde.jpg}
+                % \caption{Oscilloscope}
+            \end{figure}
+            
+            % \begin{itemize}
+            %     \item Wavefunction generators
+            %     \item Local oscillators
+            %     \item Qblox devices
+            %     \item Custom FPGA boards
+            %    \end{itemize}
+        \end{column}
+        \begin{column}{0.5 \textwidth}
+            % \includegraphics[height = 0.3 \textheight]{figures/rohde.jpg}
+            \begin{figure}
+                \includegraphics[height = 0.3 \textheight]{figures/qblox.png}
+                % \caption{Qblox}
+                \includegraphics[height = 0.3 \textheight]{figures/fpga.png}
+                % \caption{FPGA board}
+            \end{figure}
+            
+        \end{column}
+    \end{columns}
+  
+   We need a framework to control all these devices at the same time.
+    
+\end{frame}
+
+\begin{frame}{Introducing Qibolab}
+    \begin{columns}
+        \begin{column}[]{0.5 \textwidth}
+            \begin{figure}
+                \includegraphics[height=0.8\textheight]{figures/qibolab.png}
+            \end{figure}
+            
+        \end{column}
+
+        \begin{column}[]{0.5 \textwidth}
+            \begin{tcolorbox}[colframe=gray,title=Qibolab features:]
+                \begin{itemize}
+                    \item Deploy Qibo models on quantum hardware easily
+                    \item User-friendly Pulse API
+                    \item Create custom experimental drivers for lab setup
+                    \item Support multiple heterogeneous platforms
+                \end{itemize}
+                \end{tcolorbox}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}{How to use qibolab?}
+    \begin{figure}
+        \includegraphics[width=\textwidth]{figures/hardwarecircuit.png}
+    \end{figure}
+
+    \begin{columns}
+        \begin{column}{0.5 \textwidth}
+            \begin{figure}
+                \includegraphics[width = \columnwidth]{figures/qibo__circuit.png}
+            \end{figure}
+        \end{column}
+        \begin{column}{0.5 \textwidth}
+            \begin{itemize}
+                \item A single object to execute both on hardware and simulation
+                \item Job scheduling to access the hardware using slurm
+            \end{itemize}
+            \centering
+            \includegraphics[height=2cm]{figures/Slurm_logo.svg.png}
+        \end{column}
+    \end{columns}
+
+\end{frame}
+
+\begin{frame}{Quantum Machine Learning on Real Hardware}
+\includegraphics[width=\textwidth]{figures/cropped_qpu_not_normed..pdf}
+\end{frame}
+
+
+
+\section{A reporting tool for calibration using Qibo}
+
+\begin{frame}{Difficulties}
+    Suppose that we have assembled a quantum computer and we have a way
+    to send pulses to the chip... are we done? {\color{red} \textbf{No} }
+
+    We need to { \color{blue} characterize}, { \color{blue} validate} and { \color{blue} verificate} our qubits (QCVV):
+    \begin{columns}
+        \begin{column}{0.5 \textwidth}
+            \vspace{-2cm}
+            \begin{itemize}
+                \item[\faCaretSquareORight] Perform standard calibration routines:
+                \begin{itemize}
+                    \item[\faWrench] Resonator and qubit spectroscopy
+                    \item[\faWrench] Rabi and Ramsey 
+                    \item[\faWrench] T1 and T2 determination
+                
+                \end{itemize}
+                \item[\faCaretSquareORight] Perform quantum protocols to extract the fidelity:
+                \begin{itemize}
+                    \item[\faWrench] Randomized Benchmarking
+                    \item[\faWrench] Gate Set Tomography
+                    \item[\faWrench] Cross-Entropy Benchmarking
+                \end{itemize}
+                \item[\faCaretSquareORight] Repeat the above steps periodically.
+            \end{itemize}
+        \end{column}
+        \begin{column}{0.5 \textwidth}
+            \begin{figure}
+                \includegraphics[width = 0.8 \textwidth]{figures/characterization.png}
+            \end{figure}
+            
+        \end{column}
+    \end{columns}
+    
+
+\end{frame}
+
+\begin{frame}{A new reporting tool for Qibo}
+    We are developing a new tool that it will be able to perform QCVV in Qibo
+    with the following features:
+            \begin{multicols*}{2}
+                \begin{itemize}
+                    \item[\faCaretSquareORight] Platform agnostic
+                    \item[\faCaretSquareORight] Launch calibration routine easily
+                    \item[\faCaretSquareORight] Live-plotting tools
+                    \item[\faCaretSquareORight] Live-fitting tools
+                    \item[\faCaretSquareORight]Save and share your data
+                    \item[\faCaretSquareORight] Autocalibration routines
+                \end{itemize}
+            \end{multicols*}
+            \includegraphics[width=\textwidth]{figures/resonator.png}
+            
+
+   
+\end{frame}
+
+\begin{frame}{Report example}
+    
+    \begin{figure}
+        \includegraphics[width=\textwidth]{figures/qcvv.png}
+        % \includegraphics[width=\textwidth]{figures/punchout.png}
+    \end{figure}
+    
+\end{frame}
 \end{document}
+

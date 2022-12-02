@@ -1,6 +1,9 @@
 \babel@toc {english}{}\relax 
-\beamer@sectionintoc {1}{Quantum Computing and HPC}{2}{0}{1}
-\beamer@sectionintoc {2}{Introducing Qibo}{10}{0}{2}
-\beamer@sectionintoc {3}{Grover's algorithm}{27}{0}{3}
-\beamer@sectionintoc {4}{Outlook}{34}{0}{4}
-\beamer@sectionintoc {5}{Thanks for listening!}{36}{0}{5}
+\beamer@sectionintoc {1}{Quantum Computing and HPC}{4}{0}{1}
+\beamer@sectionintoc {2}{Introducing Qibo}{8}{0}{2}
+\beamer@sectionintoc {3}{Outlook}{26}{0}{3}
+\beamer@sectionintoc {4}{Thanks for listening!}{28}{0}{4}
+\beamer@sectionintoc {5}{Grover's algorithm}{29}{0}{5}
+\beamer@sectionintoc {6}{Backup slides}{36}{0}{6}
+\beamer@sectionintoc {7}{Hardware control using Qibo}{38}{0}{7}
+\beamer@sectionintoc {8}{A reporting tool for calibration using Qibo}{43}{0}{8}
