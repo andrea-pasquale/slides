@@ -156,7 +156,7 @@ layout: two-cols
 ## Motivation
 ```mermaid
 flowchart TD
-    A[How are gates implemented on a Quantum Computer?] 
+    A[How are gates implemented on a quantum computer?] 
 ```
 ```mermaid
 flowchart TD
@@ -170,7 +170,7 @@ flowchart TD
 flowchart TD
     D[Using FPGAs]
 ```
-&rarr; We need both a Pulse Level API + Drivers to interface Qibo with different instruments.
+&rarr; We need both a pulse level API + drivers to interface Qibo with different instruments.
 
 </template>
 <template v-slot:right>
@@ -216,13 +216,23 @@ platform.disconnect()
 <template v-slot:right>
 
 ## Drivers implemented
-<p align="center">
-```mermaid
-flowchart TD
-    A[Qibolab ] 
-```
 
-</p>
+Currently Qibolab supports the following drivers:
+
+<ul>
+<li><p>Qblox</p></li>
+<li><p>Quantum Machines</p></li>
+<li><p>Zurich Instruments</p></li>
+<li><p>RFSoC </p></li>
+<li><p>ZCU11 (under development) </p></li>
+
+</ul>
+
+We also supports local oscillators
+<ul>
+<li><p>RohdeSchwarz SGS100A</p></li>
+<li><p>ERASynth</p></li>
+</ul>
 </template>
 
 ---
@@ -244,7 +254,7 @@ A reporting tool for calibration using Qibo
 Let's suppose the following:
 <ol>
 <li><p>We have a QPU (self-hosted).</p></li>
-<li><p>We have control over what I send to the QPU.</p></li>
+<li><p>We have control over what we send to the QPU.</p></li>
 <li><p>We know how to convert Pulses to Circuits. </p></li>
 </ol>
 
@@ -279,17 +289,48 @@ Can I **trust** my results? **NO!**
     <img src="figures/RB zoo.png" alt="Snow" style="width:100%">
   </div>
   <div class="column">
-    <img src="figures/RB zoo.png" alt="Forest" style="width:100%">
+    <ul>
+    Currently in Qibocal the following protocols are implemented:
+    <li><p>Standard RB</p></li>
+    <li><p>Simulataneous Filtered RB</p></li>
+    <li><p>XId RB</p></li>
+    </ul>
   </div>
 </div>
+<p>  </p>
+We are currently developing a suite for the development of the <b> latest </b>
+quantum benchmarking protocols available in the <b>literature</b>.
+
+
 
 ---
 
 # Reporting tools
 ## 
-<p align="center">
+<div class="row">
+  <div class="column">
 <img src="figures/Qibocal.png" alt="Characterization" width="500" height="500" >
+  </div>
+  <div class="column">
+    <ul>
+    <li><p>Platform agnostic approach</p></li>
+    <li><p>Launch calibration routines easily</p></li>
+    <li><p>Live-plotting tools</p></li>
+    <li><p>Autocalibration (under development)</p></li>
+    </ul>
+  </div>
+</div>
+
+
+
+---
+
+
+<p align="center">
+<img src="figures/report1.png" alt="Qibo">
 </p>
+
+
 ---
 layout: center
 class: text-center
@@ -317,32 +358,36 @@ class: text-center
 # Outlook
 
 ---
+layout: two-cols
+---
 
 Qibo is growing to accomodate different tasks:
 
 <ul>
-<li><p>High performance quantum simulation: qibojit.</p></li>
-<li><p>Hardware control: qibolab</p></li>
-<li><p>Hardware calibration: qibocal</p></li>
-<li><p>A Simple mechanism for the implementation of new simulation and hardware backend drivers.</p></li>
+<li><p>High performance quantum simulation: <a href="https://github.com/qiboteam/qibojit">qibojit</a></p></li>
+<li><p>Hardware control: <a href="https://github.com/qiboteam/qibolab">qibolab</a></p></li>
+<li><p>Hardware calibration: <a href="https://github.com/qiboteam/qibocal">qibocal</a></p></li>
 </ul>
 
 
+Why should you choose Qibo?
 
-<!-- <ul>
-<li><p>High performance quantum simulation: qibojit.</p></li>
-<li><p>Hardware control: qibolab</p></li>
-<li><p><b>Hardware calibration: qibocal</p></li>
-<li><p>A Simple mechanism for the implementation of <b>new simulation and hardware backend drivers</b>.</p></li>
-</ul> -->
+<ul>
+<li><p>Publicly available as an open source project</p></li>
+<li><p>Modular layout design with the possibility of adding
+<ul><!-- start of nested list-->
+                <li><p>a new backend for simulation</p></li>
+                <li><p>a new platform for hardware control</p></li>
+            </ul><!--end of nested list--></p></li>
+<li><p>Community driven effort</p></li>
 
+</ul>
 
-- Publicly available as an open source project
-- Modular layout design with the possibility of adding
-  - new backends for simulation
-  - new backends for hardware control
-- Community driven effort
-
+<template v-slot:right>
+<p align="center">
+<img src="figures/QiboGitHub1.png" alt="Characterization" height="800" width="800">
+</p>
+</template>
 
 
 ---
