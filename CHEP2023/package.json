@@ -1,0 +1,19 @@
+{
+  "name": "chep2023",
+  "private": true,
+  "scripts": {
+    "build": "slidev build",
+    "dev": "slidev --open",
+    "export": "slidev export"
+  },
+  "dependencies": {
+    "@slidev/cli": "^0.40.16",
+    "@slidev/theme-apple-basic": "^0.20.0",
+    "@slidev/theme-default": "*",
+    "@slidev/theme-seriph": "*",
+    "slidev-theme-penguin": "^1.7.1"
+  },
+  "devDependencies": {
+    "playwright-chromium": "^1.33.0"
+  }
+}
