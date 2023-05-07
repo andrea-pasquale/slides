@@ -60,3 +60,12 @@ code:after {
   clear: both;
   display: table;
 }
+
+.column3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: left;
+  width: 33.33%;
+  /* padding: 5px; */
+}

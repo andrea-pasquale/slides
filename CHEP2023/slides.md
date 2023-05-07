@@ -16,20 +16,57 @@ Andrea Pasquale on the behalf of the Qibo collaboration
 
 9th May 2023, CHEP2023, Norfolk
 
+<br>
+<br>
+<div class="row">
+  <div class="column3">
+    <img src="figures/TII.jpg" alt="Snow" style="width:50%">
+  </div>
+  <div class="column3">
+    <img src="figures/Logo_Università_degli_Studi_di_Milano.png" alt="Forest" style="width:30%">
+  </div>
+  <div class="column3">
+    <img src="figures/2560px-INFN_logo_2017.png" alt="Mountains" style="width:50%">
+  </div>
+</div>
 ---
 transition: fade-out
+layout: two-cols
 ---
 
-<img src="figures/map.png" alt="Map">
+## Why Quantum Computing in HEP?
 
+LHC produces TB of data per second which need to processed.
+
+Currently we **cannot** keep up with the computational resources required!
+
+
+Quantum Computing (QC), especially Quantum Machine Learning (QML), is a promising solution:
+
+<ul>
+<li><p>Efficient in <b> high-dimensional </b> quantum state spaces</p></li>
+<li><p>Potential computational speed-ups</p></li>
+<li><p>Qubit representation offers <b>better compression </b></p></li>
+<li><p>Acceleration of <b> classically expensive </b> operations (eigensolvers).</p></li>
+</ul>
+
+<template v-slot:right>
+<p align="right">
+<a href="https://www.nature.com/articles/s42254-022-00425-7">Nat Rev Phys 4, 143–144</a>
+</p>
+<p align="center">
+<img src="figures/ATLAS.png" alt="Intro" width="600" height="300">
+<figcaption>Projected compute usage from ATLAS Software and Computing HC-LHC Roadmap</figcaption>
+</p>
+</template>
 
 ---
 
-# What is the challenge?
+# How can we start using Quantum Computing?
 
 ## 
 <p align="center">
-<img src="figures/intro.png" alt="Intro" width="600" height="300">
+<img src="figures/Challenge scheme.png" alt="Intro" width="450" height="400">
 <em> Is it possible to create from scratch a framework for all of this?</em>
 </p>
 
@@ -106,10 +143,14 @@ result = c(nshots=100)
 
 <ul>
 <li><p>Definition of a <b> standard language </b> for the construction and execution of quantum circuits with <b>device agnostic approach</b> to simulation and quantum hardware control based on plug and play backend drivers.</p></li>
-<li><p>A <b>continuously growing</b> code-base of quantum algorithms applications presented with examples and tutorials.</p></li>
+<li><p>A <b>continuously growing</b> code-base of quantum algorithms and applications presented with examples and tutorials.</p></li>
 <li><p><b>Efficient simulation</b> backends with GPU, multi-GPU and CPU with multi-threading support.</p></li>
-<li><p>A Simple mechanism for the implementation of <b>new simulation and hardware backend drivers</b>.</p></li>
+<li><p>A simple mechanism for adding <b>new simulation and hardware backend drivers</b>.</p></li>
 </ul>
+
+<p align="right">
+<a href="https://arxiv.org/abs/2009.01845">2009.01845</a>
+</p>
 </template>
 
 ---
@@ -125,6 +166,11 @@ result = c(nshots=100)
 <img src="figures/Qibojit.png" alt="Qibojit" height="700" width="700">
 </p>
 
+
+
+<p align="right">
+<a href="https://arxiv.org/abs/2203.08826">2203.08826</a>
+</p>
 
 
 ---
@@ -223,12 +269,11 @@ Currently Qibolab supports the following drivers:
 <li><p>Qblox</p></li>
 <li><p>Quantum Machines</p></li>
 <li><p>Zurich Instruments</p></li>
-<li><p>RFSoC </p></li>
-<li><p>ZCU11 (under development) </p></li>
+<li><p> FPGAs (based on Qick)</p></li>
 
 </ul>
 
-We also supports local oscillators
+We also support local oscillators
 <ul>
 <li><p>RohdeSchwarz SGS100A</p></li>
 <li><p>ERASynth</p></li>
@@ -250,12 +295,11 @@ A reporting tool for calibration using Qibo
 
 # Motivation
 ## 
-
 Let's suppose the following:
 <ol>
 <li><p>We have a QPU (self-hosted).</p></li>
 <li><p>We have control over what we send to the QPU.</p></li>
-<li><p>We know how to convert Pulses to Circuits. </p></li>
+<li><p>We know how to convert quantum circuits to pulses. </p></li>
 </ol>
 
 Can I **trust** my results? **NO!**
@@ -312,6 +356,10 @@ quantum benchmarking protocols available in the <b>literature</b>.
 <img src="figures/Qibocal.png" alt="Characterization" width="500" height="500" >
   </div>
   <div class="column">
+  <p align="right">
+<a href="https://arxiv.org/abs/2303.10397">2303.10397</a>
+</p>
+<p> </p >
     <ul>
     <li><p>Platform agnostic approach</p></li>
     <li><p>Launch calibration routines easily</p></li>
@@ -323,12 +371,13 @@ quantum benchmarking protocols available in the <b>literature</b>.
 
 
 
+
+
+
+
 ---
 
-
-<p align="center">
 <img src="figures/report1.png" alt="Qibo">
-</p>
 
 
 ---
@@ -340,14 +389,41 @@ class: text-center
 
 ---
 
+# Fitting PDFs using adiabatic evolution
+##
+
+Use quantum adiabatic machine learning for the determination of PDF and sampling.
+
+<div class="row">
+  <div class="column">
+    <div class="vertical-center">
+    <img src="figures/adiabatic fit.png" alt="Snow" style="width:100%">
+    </div>
+  </div>
+  <div class="column">
+    <img src="figures/adiabatic fit2.png" alt="Snow" style="width:100%">
+
+  </div>
+</div>
+
+<p align="right">
+<a href="https://arxiv.org/abs/2303.11346">2303.11346</a>
+</p>
+
+
+---
+
 # Paramater Shift Rule on Hardware
 ##
-What can we achieve using `Qibo` + `Qibolab` + `Qibocal`?
 
 Successfully performed a gradient descent on a QPU with a single using Parameter Shift Rule algorithm.
 
 <p align="center">
-<img src="figures/ratio_cropped-1.png" alt="Characterization" height="800" width="800">
+<img src="figures/ratio_cropped-1.png" alt="Characterization" height="700" width="700">
+</p>
+
+<p align="right">
+<a href="https://arxiv.org/abs/2210.10787">2210.10787</a>
 </p>
 
 ---
@@ -361,7 +437,7 @@ class: text-center
 layout: two-cols
 ---
 
-Qibo is growing to accomodate different tasks:
+We have presented Qibo, a simple full stack API capable of doing
 
 <ul>
 <li><p>High performance quantum simulation: <a href="https://github.com/qiboteam/qibojit">qibojit</a></p></li>
@@ -380,12 +456,13 @@ Why should you choose Qibo?
                 <li><p>a new platform for hardware control</p></li>
             </ul><!--end of nested list--></p></li>
 <li><p>Community driven effort</p></li>
+<li><p>Many researchers are using it for HEP applications</p></li>
 
 </ul>
 
 <template v-slot:right>
 <p align="center">
-<img src="figures/QiboGitHub1.png" alt="Characterization" height="800" width="800">
+<img src="figures/GitHub1.png" alt="Characterization" height="800" width="800">
 </p>
 </template>
 
