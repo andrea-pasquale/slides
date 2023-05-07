@@ -389,41 +389,53 @@ class: text-center
 
 ---
 
-# Fitting PDFs using adiabatic evolution
-##
+## Determination of parton distribution functions using QML  <a href="https://arxiv.org/abs/2011.13934">2011.13934</a>
 
-Use quantum adiabatic machine learning for the determination of PDF and sampling.
 
-<div class="row">
-  <div class="column">
-    <div class="vertical-center">
-    <img src="figures/adiabatic fit.png" alt="Snow" style="width:100%">
-    </div>
-  </div>
-  <div class="column">
-    <img src="figures/adiabatic fit2.png" alt="Snow" style="width:100%">
 
-  </div>
-</div>
+<p align="center">
+<img src="figures/Experiments-SingleFlavor-1.png" alt="Characterization" height="800" width="800">
+<img src="figures/ansatz.png" alt="Characterization" height="800" width="700">
 
-<p align="right">
-<a href="https://arxiv.org/abs/2303.11346">2303.11346</a>
+</p>
+---
+layout: two-cols
+---
+
+## MonteCarlo event generator using QGAN
+
+<p align="center">
+<img src="figures/ansatz1-1.png" alt="Characterization" height="800" width="800">
+<br>
+<br>
+<br>
+<em> Style-based approach </em>
+<img src="figures/noise.png" alt="Characterization" height="700" width="700">
 </p>
 
+
+
+<template v-slot:right>
+
+<p align="center">
+<img src="figures/scheme2-1.png" alt="Characterization" height="300" width="300">
+</p>
+
+<p align="right">
+<a href="https://arxiv.org/abs/2110.06933">2110.06933</a>
+</p>
+
+</template>
 
 ---
 
-# Paramater Shift Rule on Hardware
-##
-
-Successfully performed a gradient descent on a QPU with a single using Parameter Shift Rule algorithm.
+## Results with $pp \rightarrow t \bar{t}$
 
 <p align="center">
-<img src="figures/ratio_cropped-1.png" alt="Characterization" height="700" width="700">
-</p>
+<img src="figures/qgan.png" alt="Characterization" height="800" width="800">
+<br>
+<em> Implementation largely hardware independent! </em>
 
-<p align="right">
-<a href="https://arxiv.org/abs/2210.10787">2210.10787</a>
 </p>
 
 ---
@@ -473,3 +485,52 @@ class: text-center
 ---
 
 # Thanks for listening!
+
+
+---
+layout: center
+class: text-center
+---
+
+# Backup slides
+
+---
+
+# Fitting PDFs using adiabatic evolution
+##
+
+Use quantum adiabatic machine learning for the determination of PDF and sampling.
+
+<div class="row">
+  <div class="column">
+    <div class="vertical-center">
+    <img src="figures/adiabatic fit.png" alt="Snow" style="width:100%">
+    </div>
+  </div>
+  <div class="column">
+    <img src="figures/adiabatic fit2.png" alt="Snow" style="width:100%">
+
+  </div>
+</div>
+
+<p align="right">
+<a href="https://arxiv.org/abs/2303.11346">2303.11346</a>
+</p>
+
+
+---
+
+# Paramater Shift Rule on Hardware
+##
+
+Successfully performed a gradient descent on a QPU with a single using Parameter Shift Rule algorithm.
+
+<p align="center">
+<img src="figures/ratio_cropped-1.png" alt="Characterization" height="700" width="700">
+</p>
+
+<p align="right">
+<a href="https://arxiv.org/abs/2210.10787">2210.10787</a>
+</p>
+
+
