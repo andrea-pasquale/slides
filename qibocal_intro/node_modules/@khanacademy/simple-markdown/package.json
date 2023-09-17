@@ -1,0 +1,40 @@
+{
+    "name": "@khanacademy/simple-markdown",
+    "description": "Javascript markdown parsing, made simple",
+    "author": "Khan Academy",
+    "license": "MIT",
+    "version": "0.8.6",
+    "publishConfig": {
+        "access": "public"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Khan/simple-markdown.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Khan/perseus/issues"
+    },
+    "module": "dist/es/index.js",
+    "main": "dist/index.js",
+    "source": "src/index.js",
+    "scripts": {
+        "test": "bash -c 'yarn --silent --cwd \"../..\" test ${@:0} $($([[ ${@: -1} = -* ]] || [[ ${@: -1} = bash ]]) && echo $PWD)'"
+    },
+    "dependencies": {
+        "@types/react": ">=16.0.0"
+    },
+    "devDependencies": {
+        "@types/react-dom": ">=16.0.0",
+        "perseus-build-settings": "^0.0.5",
+        "size-limit": "^0.21.1",
+        "typescript": "^3.6.4",
+        "uglify-js": "^3.6.7"
+    },
+    "peerDependencies": {
+        "react": "16.14.0",
+        "react-dom": "16.14.0"
+    },
+    "keywords": [
+        "markdown"
+    ]
+}
