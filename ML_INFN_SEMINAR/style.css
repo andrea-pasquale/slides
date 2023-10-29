@@ -1,0 +1,105 @@
+.right-align {
+    float: right;
+    text-align: center;
+}
+
+.left-align {
+  float: left;
+  text-align: center;
+}
+
+td.shrink {
+  white-space: nowrap;
+  width: 0.1%;
+}
+img {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+figcaption {
+    caption-side: bottom; /* makes the caption appear underneath the image/figure */
+    font-size: 12px;
+  }
+
+.footnotes-sep {
+@apply mt-20 opacity-10;
+}
+.footnotes {
+@apply text-sm opacity-75;
+}
+.footnote-backref {
+display: none;
+}
+
+.slidev-layout {
+    h1 {
+      font-variant: small-caps;
+      line-height: 1.5rem;
+      color: #2B90B6;
+    }
+
+    h2 {
+      font-variant: small-caps;
+      font-size: 1.3rem;
+      color: #2B90B6;
+    }
+
+    p, li {
+      font-size: 1.05rem;
+      line-height: 1.4rem;
+    }
+
+    ul, ol {
+      padding-left: 2rem;
+    }
+
+    strong {
+      @apply c-fuchsia-700
+    }
+
+    b {
+      @apply c-lime-600
+    }
+  }
+
+  .dark .slidev-layout {
+    strong {
+      @apply c-fuchsia-300
+    }
+
+    b {
+      @apply c-lime-200
+    }
+  }
+
+  code:before {
+    content: none !important;
+  }
+
+  code:after {
+    content: none !important;
+  }
+
+
+  .column {
+    float: left;
+    width: 50.00%;
+    padding: 5px;
+  }
+
+  /* Clear floats after image containers */
+  .row::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  .column3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+    width: 33.33%;
+    /* padding: 5px; */
+  }
