@@ -867,6 +867,8 @@ Why should you choose Qibo?
 </template>
 
 ---
+hideInToc: truehide
+---
 
 # Collaborators
 
@@ -874,6 +876,7 @@ Why should you choose Qibo?
 
 ---
 layout: section
+hideInToc: truehide
 ---
 
 # Thanks for listening!
