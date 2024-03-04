@@ -1,16 +1,17 @@
 Finish presentation
 
-* [ ] intro to Q simulation (use herculean)
+* [ ] add clicks
+* [x] intro to Q simulation (use herculean)
 * [ ] intro to QC(?)
-* [ ] Add qibo map
+* [x] Add qibo map
 * [ ] Qibojit
-  * [ ]  add captions
-  * [ ]  check if other plots are necessary
+  * [x]  add captions
+  * [x]  check if other plots are necessary
   * [ ]  back-up slides
-* [ ]  Clifford
-  * [ ]  Show complexity to justify results
-  * [ ]  Add ref to paper
+* [x]  Clifford
+  * [x]  Show complexity to justify results
+  * [x]  Add ref to paper
 * [ ]  TN
-  * [ ]  theoretical introduction
-  * [ ]  present Singapore results
-* [ ]  Outlook and future developments
+  * [x]  theoretical introduction
+  * [x]  present Singapore results
+* [x]  Outlook and future developments

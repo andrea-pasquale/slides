@@ -13,15 +13,48 @@ layout: intro
 
 ---
 
+<div class="topright">
+<figure>
+    <img src="ACAT.jpg" width="80" alt="Bechmark" >
+    </figure>
+</div>
+
 # Quantum simulation with just-in-time compilation
 
-Andrea Pasquale
+##  Andrea Pasquale, ACAT 2024
 
-<div class="absolute bottom-10">
-  <span class="font-700">
-    Author and Date
-  </span>
+
+
+<br>
+<br>
+<br>
+ <div class="container">
+  <div class="column4">
+    <figure>
+    <img src="qibo.svg" width="80" alt="Bechmark" >
+    </figure>
+
+  </div>
+  <div class="column4">
+    <figure>
+    <img src="unimi.png" width="120" alt="Bechmark" >
+    </figure>
+
+  </div>
+  <div class="column4">
+    <figure>
+    <img src="infn.png" width="100" alt="Bechmark" >
+    </figure>
+
+  </div>
+  <div class="column4">
+    <figure>
+    <img src="TII.jpg" width="100" alt="Bechmark" >
+    </figure>
+
+  </div>
 </div>
+
 
 ---
 
@@ -35,18 +68,19 @@ Andrea Pasquale
 </ul>
 
 
-## Simulating is hard
+## However, simulation quantum computers is hard!
 
+Common issues are:
 <br>
-
 <ul>
-<li> Memory management... </li>
-<li> Optimized operation </li>
+<li> Memory management </li>
+<li> Optimize operation </li>
+<li> Explore different architectures: CPU, GPU or GPUs.</li>
 </ul>
 
 
 
-Therefore, we need a framework that has some "tricks" to efficiently perform quantum simulation...
+Therefore, we need a framework that has some "tricks" to efficiently perform quantum simulation.
 
 <div class="bottomright"> <a href="https://arxiv.org/pdf/2302.08880.pdf"> 2302.08880</a> </div>
 
@@ -56,6 +90,8 @@ layout: section
 ---
 # Qibo
 ## A quantum computing framework for simulation and hardware execution
+
+<div class="bottomright1"> <a href="https://github.com/qiboteam/qibo"> https://github.com/qiboteam/qibo </a> </div>
 
 
 ---
@@ -70,6 +106,8 @@ layout: section
 
 # `Qibojit`
 ## Full state vector simulation with JIT
+
+<div class="bottomright1"> <a href="https://github.com/qiboteam/qibojit"> https://github.com/qiboteam/qibojit </a> </div>
 
 ---
 
@@ -148,7 +186,15 @@ backgroundSize: contain
     </figure>
   </div>
 </div>
-  Fig. X Total dry run (left) and simulation (right) time scaling with the number of qubits for simulating the qft circuit using
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+    Total dry run (left) and simulation (right) time scaling with the number of qubits for simulating the qft circuit using
 different Qibo backends.
 
 
@@ -182,9 +228,42 @@ layout: section
 
 ## Approximate circuit execution
 
+<div class="bottomright1"> <a href="https://github.com/qiboteam/qibotn"> https://github.com/qiboteam/qibotn </a> </div>
+
+---
+layout: two-cols
 ---
 
-# What are Tensor Networks
+# Tensor Networks
+
+<br>
+
+Tensor Networks are a powerful method for simulating quantum circuits by representing the state or operator as a network of smaller tensors.
+<br>
+<br>
+
+<figure>
+    <img src="mps_diagram.png" alt="Bechmark" width="300" class="center" >
+    </figure>
+
+<br>
+<br>
+
+
+It is an approximate method that enable to simulate circuits with polynomial complexity.
+
+::right::
+<br>
+<br>
+
+<figure>
+    <img src="tn_space.png" alt="Bechmark" width="300" class="center">
+    <br>
+    <figcaption> The expressive power of neural networks in quantum physics. Credits to G. Carleo.</figcaption>
+  </figure>
+
+
+
 
 
 ---
@@ -260,12 +339,15 @@ layout: section
 # Clifford simulation
 
 ## Speeding up execution for Clifford circuits
+
+<div class="bottomright1"> <a href="https://qibo.science/qibo/stable/api-reference/qibo.html#qibo.backends.clifford.CliffordBackend"> Qibo Clifford backend</a> </div>
+
+
 ---
 
+# Clifford simulation in a nutshell
 
-
-By focusing on quantum circuits with only `Clifford` elements it is possible to simulation circuits with polynomial complexity:
-
+<br>
 
 <div p="x-5 y-1" bg="gray-200 dark:gray-800">
 
@@ -286,7 +368,13 @@ $\ket{\psi}$***</span>
 </div>
 </div>
 
-::right::
+<br>
+
+It can be shown <a href="https://journals.aps.org/pra/abstract/10.1103/PhysRevA.70.052328"> Phys. Rev. A 70, 052328 (2004) </a>
+that the complexity is $O(n)$ for the application of a single gate while measurements can be performed
+in $O(n^2)$.
+
+<!-- ::right::
 <div flex="~ col justify-center" text-sm>
 
 $$
@@ -309,7 +397,9 @@ compressed *tableau*.
 It still requires vectorized operations on the boolean entries, that can be optimized in
 a similar fashion to the general state vector approach.
 
-</div>
+</div> -->
+
+
 
 ---
 
@@ -330,11 +420,6 @@ a similar fashion to the general state vector approach.
     </figure>
 
 
-
----
-layout: section
----
-# Applications
 
 ---
 layout: section
@@ -376,29 +461,3 @@ layout: section
 # Thanks for listening!
 
 ---
-layout: section
----
-
-# Back-up slides
-
----
-layout: two-cols
----
-# Example using `numba`
-
-```py
-from numba import njit
-
-@njit(parallel=True,cache=True)
-def apply_x_kernel(state, gate, nstates, m):
-    tk = 1 << m
-    for g in prange(nstates):
-        i1 = ((g >> m) << (m + 1)) + (g & (tk - 1))
-        i2 = i1 + tk
-        state[i1], state[i2] = state[i2], state[i1]
-    return state
-```
-::right::
-
-* in-place updates
-* exploit sparsity of matrices using custom operators

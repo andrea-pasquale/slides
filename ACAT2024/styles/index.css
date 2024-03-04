@@ -7,11 +7,23 @@
     padding: 5px;
   }
 
+  .column4 {
+    flex: 25%;
+    padding: 5px;
+  }
+
 
   .bottomright {
     position: absolute;
-    bottom: 8px;
+    bottom: 10px;
     right: 16px;
+    font-size: 18px;
+  }
+
+  .bottomright1 {
+    position: absolute;
+    bottom: 50px;
+    right: 80px;
     font-size: 18px;
   }
 
@@ -44,4 +56,11 @@ figure {
   width: calc(1777px * 0.05);
   height: calc(2000px * 0.05);
   position: relative;
+}
+
+.topright {
+  position: absolute;
+  top: 8px;
+  right: 16px;
+  font-size: 18px;
 }
